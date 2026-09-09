@@ -6,7 +6,7 @@
 void menu_setup() {
     battery_setup();
     clock_setup();
-    touch_setup();
+    //touch_setup();
 }
 
 void menu_run() {
@@ -17,8 +17,3 @@ void menu_run() {
     say(date_run(), 50, 340, WHITE, 4);
 }
 
-void menu_backend() {
-    
-
-
-}

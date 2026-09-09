@@ -1,5 +1,5 @@
 #include "app.h"
-#include "media/logo.h"
+#include "media/images.h"
 
 void startup_setup() {
     // Wire Setup

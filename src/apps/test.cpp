@@ -1,15 +1,15 @@
 #include "app.h"
-
+#include "media/images.h"
 
 
 
 /*----------TEST----------*/
-void test_setup() {
-    display_setup();
-    startup_setup();
-    startup_run();
-    clear();
-}
+// void test_setup() {
+//     display_setup();
+//     startup_setup();
+//     startup_run();
+//     clear();
+// }
 
 
 
@@ -111,9 +111,14 @@ void screen2() {
     
 }
 
-void test_run() {
-    screen1();
+// void test_run() {
+//     screen1();
     
 
 
+// }
+
+void test_run() {
+    clear();
+    Button alarmButton(0, 0, 30, 30, RED, icons8_alarm_clock_50);
 }

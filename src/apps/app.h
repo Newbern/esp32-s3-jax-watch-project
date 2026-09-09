@@ -5,7 +5,7 @@
 #include "functions/functions.h"
 #include "clock/clock.h"
 #include "power/power.h"
-#include "wifi/wifi.h"
+//#include "wifi/wifi.h"
 /*----------FUNCTIONS----------*/
 // Serial
 void serial_setup();

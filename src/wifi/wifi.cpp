@@ -1,103 +1,103 @@
-#include <WiFi.h>
-#include <HTTPClient.h>
-#include <ArduinoJson.h>
-#include "storage/storage.h"
-#include "functions/functions.h"
+// #include <WiFi.h>
+// #include <HTTPClient.h>
+// #include <ArduinoJson.h>
+// #include "storage/storage.h"
+// #include "functions/functions.h"
 
-const char* ssid = "Newbern";
-const char* password = "Milo2025!";
+// const char* ssid = "Newbern";
+// const char* password = "Milo2025!";
 
-void wifi_setup() {
-    WiFi.begin(ssid, password);
+// void wifi_setup() {
+//     WiFi.begin(ssid, password);
 
-    Serial.print("Connecting to WiFi");
+//     Serial.print("Connecting to WiFi");
 
-    while (WiFi.status() != WL_CONNECTED) {
-        delay(500);
-        Serial.print(".");
-    }
+//     while (WiFi.status() != WL_CONNECTED) {
+//         delay(500);
+//         Serial.print(".");
+//     }
 
-    Serial.println();
-    Serial.println("WiFi connected!");
-    say("WiFi connected!", 50, 100, RED, 4);
-    say(WiFi.localIP().toString().c_str(), 50, 150, RED, 2);
-    delay(2000);
-}
+//     Serial.println();
+//     Serial.println("WiFi connected!");
+//     say("WiFi connected!", 50, 100, RED, 4);
+//     say(WiFi.localIP().toString().c_str(), 50, 150, RED, 2);
+//     delay(2000);
+// }
 
 
 
-void login()
-{
-    HTTPClient http;
+// void login()
+// {
+//     HTTPClient http;
 
-    http.begin("http://10.0.0.168:8000/auth/login");
-    http.addHeader("Content-Type", "application/json");
+//     http.begin("http://10.0.0.168:8000/auth/login");
+//     http.addHeader("Content-Type", "application/json");
 
-    String body = R"({
-        "device_id": "1",
-        "api_key": "abc123"
-    })";
+//     String body = R"({
+//         "device_id": "1",
+//         "api_key": "abc123"
+//     })";
 
-    int responseCode = http.POST(body);
+//     int responseCode = http.POST(body);
 
-    String response = http.getString();
+//     String response = http.getString();
 
-    Serial.println(responseCode);
-    Serial.println(response);
+//     Serial.println(responseCode);
+//     Serial.println(response);
 
-    if (responseCode == 200)
-    {
-        JsonDocument doc;
+//     if (responseCode == 200)
+//     {
+//         JsonDocument doc;
 
-        DeserializationError error = deserializeJson(doc, response);
+//         DeserializationError error = deserializeJson(doc, response);
 
-        if (error)
-        {
-            Serial.println("JSON parsing failed");
-            http.end();
-            return;
-        }
+//         if (error)
+//         {
+//             Serial.println("JSON parsing failed");
+//             http.end();
+//             return;
+//         }
 
-        bool success = doc["success"];
+//         bool success = doc["success"];
 
-        if (success)
-        {
-            String token = doc["session"].as<String>();
+//         if (success)
+//         {
+//             String token = doc["session"].as<String>();
 
-            saveToken(token);
+//             saveToken(token);
 
-            Serial.println("Login successful");
-        }
-        else
-        {
-            Serial.println(doc["message"].as<String>());
-        }
-    }
+//             Serial.println("Login successful");
+//         }
+//         else
+//         {
+//             Serial.println(doc["message"].as<String>());
+//         }
+//     }
 
-    http.end();
-}
+//     http.end();
+// }
 
-void get_alarms() {
-    HTTPClient http;
+// void get_alarms() {
+//     HTTPClient http;
 
-    http.begin("http://10.0.0.168:8000/alarm/get-alarms");
+//     http.begin("http://10.0.0.168:8000/alarm/get-alarms");
 
-    String sessiontoken = loadToken();
+//     String sessiontoken = loadToken();
 
-    https.addHeader (
-        "Cookie",
-        "session_token=" + sessiontoken
-    )
+//     http.addHeader (
+//         "Cookie",
+//         "session_token=" + sessiontoken
+//     )
 
-    int responseCode = http.GET();
-    String response = http.getString();
+//     int responseCode = http.GET();
+//     String response = http.getString();
 
-    say(String(responseCode).c_str(), 50, 100, RED, 4);
+//     say(String(responseCode).c_str(), 50, 100, RED, 4);
 
-    if (responseCode > 0) {
-        say("Response:", 50, 150, RED, 4);
-        say(response.c_str(), 50, 200, RED, 4);
-    }
+//     if (responseCode > 0) {
+//         say("Response:", 50, 150, RED, 4);
+//         say(response.c_str(), 50, 200, RED, 4);
+//     }
 
-    http.end();
-}
+//     http.end();
+// }
