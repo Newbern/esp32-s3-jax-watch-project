@@ -14,13 +14,15 @@ void print(const char* text);
 
 class Button {
 public:
+    const char* name;
     int x, y, w, h, color;
     const uint8_t* img;
     int img_size;
 
-    Button(int x, int y, int w, int h, int color, const uint8_t* img);
+    Button(const char* name, int x, int y, int w, int h, int color, const uint8_t* img);
 
     void draw();
+    void hit(TouchPoint touch, void (*function)());
 };
 
 #endif

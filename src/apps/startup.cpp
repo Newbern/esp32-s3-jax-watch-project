@@ -19,4 +19,5 @@ void startup_run(){
     clear();
     say("Steven Newbern", 50, 100, RED, 4);
     delay(2000);
+    clear();
 }

@@ -119,6 +119,10 @@ void screen2() {
 // }
 
 void test_run() {
-    clear();
-    Button alarmButton(0, 0, 30, 30, RED, icons8_alarm_clock_50);
+    Button alarmButton("menu", 100, 100, 100, 100, RED, icons8_alarm_clock_50);
+    alarmButton.draw();
+    TouchPoint point = touch_run(nullptr);
+    alarmButton.hit(point, menu_run);
+
+
 }
