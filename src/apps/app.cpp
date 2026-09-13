@@ -22,6 +22,7 @@ void app_setup(){
 void app_run(){
     // Running Main Menu
     //touch_run(menu_run);
-    touch_run(test_run);
+    //touch_run(test_run);
+    test_run();
 
 }

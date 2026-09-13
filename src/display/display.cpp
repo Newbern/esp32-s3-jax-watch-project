@@ -43,6 +43,11 @@ void touch_setup() {
     } else {
         Serial.println("Touch OK");
     }
+
+    gfx->displayOn();
+    displayOn = true;
+    lastTouch = millis();
+
 }
 
 
@@ -58,6 +63,8 @@ TouchPoint touch_run(void (*function)())
         int16_t x[1];
         int16_t y[1];
 
+        wake();
+
         if (touch.getPoint(x, y) > 0)
         {
             point.pressed = true;
@@ -65,8 +72,6 @@ TouchPoint touch_run(void (*function)())
             point.y = y[0];
 
             lastTouch = millis();
-
-            wake();
 
             if (function != nullptr)
             {

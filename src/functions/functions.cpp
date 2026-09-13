@@ -1,6 +1,6 @@
 #include "functions.h"
 
-void say(const char* text, int x, int y, uint16_t color, uint8_t size) {
+void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t size) {
     gfx->setTextSize(size);
     gfx->setTextColor(color);
     gfx->setCursor(x,y);
@@ -9,6 +9,10 @@ void say(const char* text, int x, int y, uint16_t color, uint8_t size) {
 
 void clear() {
     gfx->fillScreen(BLACK);
+}
+
+void timeout() {
+    delay(5000); // Wait 5 seconds
 }
 
 void print(const char* text) {
@@ -30,7 +34,8 @@ Button::Button(const char* name, int x, int y, int w, int h, int color, const ui
     this->h = h;
     this->color = color;
     this->img = img;
-    this->img_size = 16;
+    this->img_width = 50;
+    this->img_height = 50;
     merge_print("Createing %s Button", name);
 }
 
@@ -40,11 +45,11 @@ void Button::draw()
     merge_print("%s is on Display", name);
 
     // gfx->drawBitmap(
-    //     x + (w - img_size) / 2,
-    //     y + (h - img_size) / 2,
+    //     x + (w - img_width) / 2 + 10,
+    //     y + (h - img_height) / 2 + 10,
     //     img,
-    //     img_size,
-    //     img_size,
+    //     img_width,
+    //     img_height,
     //     WHITE
     // );
 }
@@ -62,8 +67,12 @@ void Button::hit(TouchPoint touch, void (*function)())
     {
         if (function != nullptr)
         {
+            merge_print("Running %s", name);
             clear();
             function();
+            timeout();
+            clear();
+
         }
     }
 }
