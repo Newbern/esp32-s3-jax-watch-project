@@ -23,7 +23,7 @@ public:
 
     Button(const char* name, int x, int y, int w, int h, int color, const uint8_t* img);
 
-    void draw();
+    void draw(void *(function()) = nullptr);
     void hit(TouchPoint touch, void (*function)());
 };
 

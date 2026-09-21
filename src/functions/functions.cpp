@@ -1,6 +1,6 @@
 #include "functions.h"
 
-void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t size) {
+void say(const char* text, int x, int y, uint16_t color, uint8_t size) {
     gfx->setTextSize(size);
     gfx->setTextColor(color);
     gfx->setCursor(x,y);
@@ -39,19 +39,16 @@ Button::Button(const char* name, int x, int y, int w, int h, int color, const ui
     merge_print("Createing %s Button", name);
 }
 
-void Button::draw()
+void Button::draw(void (*function()))
 {
-    gfx->fillRect(x, y, w, h, color);
     merge_print("%s is on Display", name);
 
-    // gfx->drawBitmap(
-    //     x + (w - img_width) / 2 + 10,
-    //     y + (h - img_height) / 2 + 10,
-    //     img,
-    //     img_width,
-    //     img_height,
-    //     WHITE
-    // );
+    if (function != nullptr) {
+        function();
+    };
+    if (function == nullptr) {
+        gfx->fillRect(x, y, w, h, color);}
+
 }
 
 void Button::hit(TouchPoint touch, void (*function)())
