@@ -5,11 +5,12 @@ void app_setup(){
     serial_setup();
     // Display Setup
     display_setup();
-    
+    settings_setup();
     // Custom System setup
     startup_setup();
     // Main Menu Setup
     menu_setup();
+    //test_setup();
     // Touch Setup
     touch_setup();
     // WIFI Setup
@@ -21,8 +22,10 @@ void app_setup(){
 
 void app_run(){
     // Running Main Menu
-    //touch_run(menu_run);
+    TouchPoint pressed = touch_run(nullptr);
+    menu_run(pressed);
     //touch_run(test_run);
-    test_run();
+
+
 
 }

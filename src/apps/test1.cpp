@@ -3,13 +3,13 @@
 
 
 /*----------MAIN MENU----------*/
-void menu_setup() {
+void test_setup() {
     battery_setup();
     clock_setup();
     //touch_setup();
 }
 
-void menu_run() {
+void test_run() {
     say(battery_run(), 50, 50, WHITE, 2);
     say("Main Menu", 50,100, RED, 4);
     say(clock_run(), 50, 220, WHITE, 4);

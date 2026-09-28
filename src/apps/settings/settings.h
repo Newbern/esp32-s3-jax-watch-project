@@ -13,16 +13,11 @@
 
 // Setting Wifi Button
 
-extern Button wifiButton;
-extern Button jaxButton;
-extern Button batteryButton;
-extern Button clockButton;
-extern Button weatherButton;
-extern Button appsButton;
-
-// Buttons Being Pressed
-extern TouchPoint pressed;
-
-
+extern Button* wifiButton;
+extern Button* jaxButton;
+extern Button* batteryButton;
+extern Button* clockButton;
+extern Button* weatherButton;
+extern Button* appsButton;
 
 #endif
