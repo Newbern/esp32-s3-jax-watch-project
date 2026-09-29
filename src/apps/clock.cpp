@@ -5,5 +5,5 @@ void time_setup() {
 }
 
 void time_run() {
-    say(clock_run(), 0, 0, WHITE, 24);
+    //say(clock_run(), 0, 0, WHITE, 24);
 }

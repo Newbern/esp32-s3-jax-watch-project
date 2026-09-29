@@ -1,9 +1,26 @@
 #include "functions.h"
 
-void say(const char* text, int x, int y, uint16_t color, uint8_t size) {
+// void say(const char* text, int x, int y, uint16_t color, uint8_t size) {
+//     gfx->setTextSize(size);
+//     gfx->setTextColor(color);
+//     gfx->setCursor(x,y);
+//     gfx->print(text);
+// }
+
+void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t size) {
+
     gfx->setTextSize(size);
     gfx->setTextColor(color);
-    gfx->setCursor(x,y);
+
+    int16_t x1, y1;
+    uint16_t text_w, text_h;
+
+    gfx->getTextBounds(text, 0, 0, &x1, &y1, &text_w, &text_h);
+
+    int text_x = x + (w - text_w) / 2;
+    int text_y = y + (h - text_h) / 2 - y1;
+
+    gfx->setCursor(text_x, text_y);
     gfx->print(text);
 }
 

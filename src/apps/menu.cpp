@@ -5,39 +5,38 @@ void menu_setup() {
     clock_setup();
 }
 
-void nothing() {
-    print("hit");
-}
-
-void show(const char* name, int x, int y){
-    say(name, x, y, WHITE, 8);
+void show(const char* name, Button* button) {
+    say(name, button->x, button->y, button->w, button->h, BLACK, 2);
 }
 
 void menu_run(TouchPoint pressed) {
 
     if (pressed.pressed) {
-        // Drawing Buttons
-        wifiButton->draw(nullptr);//(show("Wifi", wifiButton.x, wifiButton.y));
-        jaxButton->draw(nullptr);//(show("JAX", jaxButton.x, jaxButton.y));
-        batteryButton->draw(nullptr);//(show("BAT", batteryButton.x, batteryButton.y));
-        clockButton->draw(nullptr);//(show("10:30AM", clockButton.x, clockButton.y));
-        weatherButton->draw(nullptr);//(show("weather", weatherButton.x, weatherButton.y));
-        appsButton->draw(nullptr);//(show("apps", appsButton.x, appsButton.y));
 
-        // show("Wifi", wifiButton.x, wifiButton.y);
-        // show("JAX", jaxButton.x, jaxButton.y);
-        // show("BAT", batteryButton.x, batteryButton.y);
-        // show("10:30AM", clockButton.x, clockButton.y);
-        // show("weather", weatherButton.x, weatherButton.y);
-        // show("apps", appsButton.x, appsButton.y);
+        // Drawing Buttons
+        wifiButton->draw(nullptr);
+        jaxButton->draw(nullptr);
+        batteryButton->draw(nullptr);
+        clockButton->draw(nullptr);
+        weatherButton->draw(nullptr);
+        appsButton->draw(nullptr);
+
+        // Drawing Button Names
+        show("Wifi", wifiButton);
+        show("JAX", jaxButton);
+        show("BAT", batteryButton);
+        show("10:30AM", clockButton);
+        show("weather", weatherButton);
+        show("apps", appsButton);
     }
 
+
     // Button being Pressed
-    wifiButton->hit(pressed, nothing);
-    jaxButton->hit(pressed, nothing);
-    batteryButton->hit(pressed, nothing);
-    clockButton->hit(pressed, nothing);
-    weatherButton->hit(pressed, nothing);
-    appsButton->hit(pressed, nothing);
+    //wifiButton->hit(pressed, nothing);
+    //jaxButton->hit(pressed, nothing);
+    //batteryButton->hit(pressed, nothing);
+    //clockButton->hit(pressed, nothing);
+    //weatherButton->hit(pressed, nothing);
+    //appsButton->hit(pressed, nothing);
 
 }

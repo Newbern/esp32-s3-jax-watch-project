@@ -7,7 +7,8 @@
 /*----------Global----------*/
 
 /*----------FUNCTIONS----------*/
-void say(const char* text, int x, int y, uint16_t color, uint8_t size);
+// void say(const char* text, int x, int y, uint16_t color, uint8_t size);
+void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t size);
 void clear();
 void timeout();
 void print(const char* text);

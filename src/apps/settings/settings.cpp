@@ -4,8 +4,8 @@
 int screen_w;
 int screen_h;
 // Getting Spacers & Outside Spaces
-int spacer = 10;
-int outside = 25;
+int spacer;
+int outside;
 // Setting Width & Height
 int w;
 int h;
@@ -57,8 +57,8 @@ void settings_setup() {
     outside = 25;
 
     // Setting Width & Height
-    w = (screen_w - spacer * 2 - outside*2 ) / 3;
-    h = (screen_h - spacer * 3- outside*2 ) /4;
+    w = (screen_w - spacer * 2 - outside * 2) / 3;
+    h = (screen_h - spacer * 3 - outside * 2) / 4;
 
     // Setting Coordinates
     x = outside;
@@ -81,14 +81,14 @@ void settings_setup() {
     h_app4 = h * 2;
     // App 5 (Weather)
     x_app5 = x;
-    y_app5 = y + ((screen_h - spacer * 3- outside*2 ) /4)*3 + spacer*2;
-    w_app5 = ((screen_w - spacer*2- outside*2  ) / 2);
-    h_app5 = ((screen_h - spacer * 3- outside*2 ) /4);
+    y_app5 = y + ((screen_h - spacer * 3 - outside * 2 ) / 4) * 3 + spacer * 2;
+    w_app5 = ((screen_w - spacer * 2 - outside * 2 ) / 2);
+    h_app5 = ((screen_h - spacer * 3 - outside * 2 ) / 4);
     // App 6 (Other Apps)
-    x_app6 = x + ((screen_w - spacer*2- outside*2  ) / 2) + spacer;
-    y_app6 = y + ((screen_h - spacer * 3- outside*2 ) /4)*3 + spacer*2;
-    w_app6 = ((screen_w - spacer*2- outside*2  ) / 2);
-    h_app6 = ((screen_h - spacer * 3- outside*2 ) /4);
+    x_app6 = x + ((screen_w - spacer * 2 - outside * 2 ) / 2) + spacer;
+    y_app6 = y + ((screen_h - spacer * 3 - outside * 2 ) / 4) * 3 + spacer * 2;
+    w_app6 = ((screen_w - spacer * 2 - outside * 2 ) / 2);
+    h_app6 = ((screen_h - spacer * 3 - outside * 2 ) / 4);
 
     // Buttons
     wifiButton = new Button("wifi", x_app1, y_app1, w, h, RED, epd_bitmap_icons8_home_50);

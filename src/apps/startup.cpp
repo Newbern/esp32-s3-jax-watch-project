@@ -15,9 +15,20 @@ void startup_setup() {
     
 }
 
-void startup_run(){
+// void startup_run(){
+//     clear();
+//     say("Steven Newbern", 50, 100, RED, 4);
+//     delay(2000);
+//     clear();
+// }
+
+void startup_run() {
+
     clear();
-    say("Steven Newbern", 50, 100, RED, 4);
+
+    say("Steven Newbern", 0, 100, gfx->width(), gfx->height(), RED, 4);
+
     delay(2000);
+
     clear();
 }
