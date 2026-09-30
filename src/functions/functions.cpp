@@ -56,21 +56,16 @@ Button::Button(const char* name, int x, int y, int w, int h, int color, const ui
     merge_print("Createing %s Button", name);
 }
 
-void Button::draw(void (*function()))
+void Button::draw(const char* text, uint16_t text_color, uint8_t font_size)
 {
-    merge_print("%s is on Display", name);
-
-    if (function != nullptr) {
-        function();
-    };
-    if (function == nullptr) {
-        gfx->fillRect(x, y, w, h, color);}
+    gfx->fillRect(x, y, w, h, color);
+    say(text, x, y, w, h, text_color, font_size);
+    
 
 }
 
 void Button::hit(TouchPoint touch, void (*function)())
 {
-    merge_print("%s Touching Logic", name);
     if (!touch.pressed)
         return;
 

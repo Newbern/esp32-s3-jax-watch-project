@@ -5,8 +5,12 @@ void menu_setup() {
     clock_setup();
 }
 
-void show(const char* name, Button* button) {
-    say(name, button->x, button->y, button->w, button->h, BLACK, 2);
+void show_date(const char* text, Button* button) {
+    int x = button->x;
+    int y = button->y * 2;
+    int w = button->w;
+    int h = button->h / 2;
+    say(text, x, y, w, h, BLACK, 4);
 }
 
 void menu_run(TouchPoint pressed) {
@@ -14,20 +18,14 @@ void menu_run(TouchPoint pressed) {
     if (pressed.pressed) {
 
         // Drawing Buttons
-        wifiButton->draw(nullptr);
-        jaxButton->draw(nullptr);
-        batteryButton->draw(nullptr);
-        clockButton->draw(nullptr);
-        weatherButton->draw(nullptr);
-        appsButton->draw(nullptr);
+        wifiButton->draw("Wifi", BLACK, 2);
+        jaxButton->draw("JAX", BLACK, 2);
+        batteryButton->draw("BAT", BLACK, 2);
+        clockButton->draw(clock_run(), BLACK, 12); // time only -> 12,     time & date -> 
+        show_date(date_run(), clockButton);
+        weatherButton->draw("weather", BLACK, 2);
+        appsButton->draw("apps", BLACK, 2);
 
-        // Drawing Button Names
-        show("Wifi", wifiButton);
-        show("JAX", jaxButton);
-        show("BAT", batteryButton);
-        show("10:30AM", clockButton);
-        show("weather", weatherButton);
-        show("apps", appsButton);
     }
 
 
