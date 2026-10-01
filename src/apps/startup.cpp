@@ -23,10 +23,32 @@ void startup_setup() {
 // }
 
 void startup_run() {
+    // Getting Screen Dimensions
+    int screen_w = gfx->width();
+    int screen_h = gfx->height();
+
+    // Getting Spacers & Outside Spaces
+    int spacer = 10;
+    int outside = 25;
+
+    // Setting Width & Height
+    int w = (screen_w - spacer * 2 - outside * 2);
+    int h = (screen_h - spacer * 3 - outside * 2);
+
+    // Setting Coordinates
+    int x = outside;
+    int y = outside;
 
     clear();
 
-    say("Steven Newbern", 0, 100, gfx->width(), gfx->height(), RED, 4);
+    say("Steven Newbern", x, y, w, h, RED, 4);
+    
+    if (wifi_setup()) {
+    say("WiFi Connected", x, y + 50, w, h, GREEN, 4);
+    }
+    else {
+        say("WiFi Failed", x, y + 50, w, h, RED, 4);
+    }
 
     delay(2000);
 

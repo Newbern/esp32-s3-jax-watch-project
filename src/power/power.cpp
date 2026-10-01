@@ -26,7 +26,7 @@ const char* battery_run() {
 
         sprintf(
             batteryBuffer,
-            "Battery: %d%%",
+            "%d%%",
             battery
         );
     }

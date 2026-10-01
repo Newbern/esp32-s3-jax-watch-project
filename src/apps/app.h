@@ -30,7 +30,7 @@ void menu_run(TouchPoint pressed);
 // void menu_backend();
 
 // WIFI
-void wifi_setup();
+bool wifi_setup();
 void api_test();
 
 // Test

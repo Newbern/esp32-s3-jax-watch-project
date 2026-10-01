@@ -10,7 +10,7 @@ void show_date(const char* text, Button* button) {
     int y = button->y * 2;
     int w = button->w;
     int h = button->h / 2;
-    say(text, x, y, w, h, BLACK, 4);
+    say(text, x, y, w, h, WHITE, 4);
 }
 
 void menu_run(TouchPoint pressed) {
@@ -20,8 +20,8 @@ void menu_run(TouchPoint pressed) {
         // Drawing Buttons
         wifiButton->draw("Wifi", BLACK, 2);
         jaxButton->draw("JAX", BLACK, 2);
-        batteryButton->draw("BAT", BLACK, 2);
-        clockButton->draw(clock_run(), BLACK, 12); // time only -> 12,     time & date -> 
+        batteryButton->draw(battery_run(), BLACK, 2);
+        clockButton->draw(clock_run(), BLACK, 10); // time only -> 10,     time & date -> 4
         show_date(date_run(), clockButton);
         weatherButton->draw("weather", BLACK, 2);
         appsButton->draw("apps", BLACK, 2);

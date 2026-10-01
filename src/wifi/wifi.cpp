@@ -1,28 +1,44 @@
-// #include <WiFi.h>
-// #include <HTTPClient.h>
-// #include <ArduinoJson.h>
-// #include "storage/storage.h"
-// #include "functions/functions.h"
+#include <WiFi.h>
+#include "wifi_credentials.h"
+#include <HTTPClient.h>
+#include <ArduinoJson.h>
+#include "storage/storage.h"
+#include "functions/functions.h"
 
-// const char* ssid = "Newbern";
-// const char* password = "Milo2025!";
 
-// void wifi_setup() {
-//     WiFi.begin(ssid, password);
 
-//     Serial.print("Connecting to WiFi");
+bool wifi_setup() {
 
-//     while (WiFi.status() != WL_CONNECTED) {
-//         delay(500);
-//         Serial.print(".");
-//     }
+    for (int i = 0; i < wifi_count; i++) {
 
-//     Serial.println();
-//     Serial.println("WiFi connected!");
-//     say("WiFi connected!", 50, 100, RED, 4);
-//     say(WiFi.localIP().toString().c_str(), 50, 150, RED, 2);
-//     delay(2000);
-// }
+        Serial.print("Connecting to ");
+        Serial.println(ssids[i]);
+
+        WiFi.begin(ssids[i], passwords[i]);
+
+        for (int attempt = 0; attempt < 5; attempt++) {
+
+            if (WiFi.status() == WL_CONNECTED) {
+                Serial.println();
+                Serial.println("WiFi connected!");
+                Serial.println(WiFi.localIP());
+
+                return true;
+            }
+
+            delay(500);
+            Serial.print(".");
+        }
+
+        Serial.println();
+        Serial.println("Connection failed!");
+
+        WiFi.disconnect();
+    }
+
+    Serial.println("No WiFi available.");
+    return false;
+}
 
 
 
