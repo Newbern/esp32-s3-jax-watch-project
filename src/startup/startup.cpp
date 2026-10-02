@@ -43,7 +43,7 @@ void startup_run() {
 
     say("Steven Newbern", x, y, w, h, RED, 4);
     
-    if (wifi_setup()) {
+    if (wifi.setup()) {
     say("WiFi Connected", x, y + 50, w, h, GREEN, 4);
     }
     else {

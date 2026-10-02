@@ -13,8 +13,6 @@ void app_setup(){
     //test_setup();
     // Touch Setup
     touch_setup();
-    // WIFI Setup
-    //wifi_setup();
     // Running Startup system
     startup_run();
 }
@@ -24,7 +22,6 @@ void app_run(){
     // Running Main Menu
     TouchPoint pressed = touch_run(nullptr);
     menu_run(pressed);
-    //touch_run(test_run);
 
 
 

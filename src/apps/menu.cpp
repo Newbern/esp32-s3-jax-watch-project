@@ -18,7 +18,7 @@ void menu_run(TouchPoint pressed) {
     if (pressed.pressed) {
 
         // Drawing Buttons
-        wifiButton->draw("Wifi", BLACK, 2);
+        wifiButton->draw(wifi.name().c_str(), BLACK, 2);
         jaxButton->draw("JAX", BLACK, 2);
         batteryButton->draw(battery_run(), BLACK, 2);
         clockButton->draw(clock_run(), BLACK, 10); // time only -> 10,     time & date -> 4
@@ -30,7 +30,7 @@ void menu_run(TouchPoint pressed) {
 
 
     // Button being Pressed
-    //wifiButton->hit(pressed, nothing);
+    wifiButton->hit(pressed, nothing);
     //jaxButton->hit(pressed, nothing);
     //batteryButton->hit(pressed, nothing);
     //clockButton->hit(pressed, nothing);

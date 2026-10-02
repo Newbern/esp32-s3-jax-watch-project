@@ -1,13 +1,19 @@
+
+// Wifi Setup
 #include <WiFi.h>
+#include "wifi.h"
 #include "wifi_credentials.h"
+
+// Request
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include "storage/storage.h"
 #include "functions/functions.h"
 
 
+Wifi wifi;
 
-bool wifi_setup() {
+bool Wifi::setup() {
 
     for (int i = 0; i < wifi_count; i++) {
 
@@ -40,6 +46,30 @@ bool wifi_setup() {
     return false;
 }
 
+bool Wifi::connected() {
+    return WiFi.status() == WL_CONNECTED;
+}
+
+String Wifi::name(){
+    if (!connected()){
+        return "No Wifi Name";
+    }
+    return WiFi.SSID();
+}
+
+String Wifi::password(){
+    if (!connected()){
+        return "No Wifi Password";
+    }
+    return WiFi.psk();
+}
+
+String Wifi::ip(){
+    if (!connected()){
+        return "No Wifi connected, No IP_Address.";
+    }
+    return WiFi.localIP().toString();
+}
 
 
 // void login()
