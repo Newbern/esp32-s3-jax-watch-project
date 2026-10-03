@@ -1,14 +1,7 @@
-
-// Wifi Setup
-#include <WiFi.h>
 #include "wifi.h"
-#include "wifi_credentials.h"
 
-// Request
-#include <HTTPClient.h>
-#include <ArduinoJson.h>
-#include "storage/storage.h"
-#include "functions/functions.h"
+
+
 
 
 Wifi wifi;

@@ -1,12 +1,6 @@
 #include "functions.h"
 
-// void say(const char* text, int x, int y, uint16_t color, uint8_t size) {
-//     gfx->setTextSize(size);
-//     gfx->setTextColor(color);
-//     gfx->setCursor(x,y);
-//     gfx->print(text);
-// }
-
+// Prints Words on Screen
 void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t size) {
 
     gfx->setTextSize(size);
@@ -24,24 +18,29 @@ void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t s
     gfx->print(text);
 }
 
+// Clears Screen Black
 void clear() {
     gfx->fillScreen(BLACK);
 }
 
+// Timeout
 void timeout() {
     delay(5000); // Wait 5 seconds
 }
 
+// Serial printer for monitor view
 void print(const char* text) {
     Serial.println(text);
 }
 
+// Serial printer that merges text & variables
 void merge_print(const char* text, const char* var){
     char message[100];
     snprintf(message, sizeof(message), text, var);
     print(message);
 }
 
+// Button Class
 Button::Button(const char* name, int x, int y, int w, int h, int color, const uint8_t* img)
 {
     this->name = name;
@@ -56,6 +55,7 @@ Button::Button(const char* name, int x, int y, int w, int h, int color, const ui
     merge_print("Createing %s Button", name);
 }
 
+// Draws Button class Object
 void Button::draw(const char* text, uint16_t text_color, uint8_t font_size)
 {
     gfx->fillRect(x, y, w, h, color);
@@ -64,6 +64,7 @@ void Button::draw(const char* text, uint16_t text_color, uint8_t font_size)
 
 }
 
+// Button Logic for when the Button area is pressed
 void Button::hit(TouchPoint touch, void (*function)())
 {
     if (!touch.pressed)
@@ -84,4 +85,20 @@ void Button::hit(TouchPoint touch, void (*function)())
 
         }
     }
+}
+
+// Button Logic for when swiped
+bool Button::swipe(TouchPoint touch, int a, int b, bool x_axis) {
+    if (!touch.pressed) {
+        return false;
+    }
+
+    if (x_axis){
+        return touch.x >= a && touch.x <= b;
+    }
+
+    return touch.y >= a && touch.y <= b;
+
+
+
 }

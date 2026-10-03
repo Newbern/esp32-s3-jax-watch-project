@@ -71,7 +71,7 @@ void settings_setup() {
     // App 2 (Jax Server Connection)
     x_app2 = x + w + spacer;
     y_app2 = y;
-    // App 3 (Batter Level)
+    // App 3 (Battery Level)
     x_app3 = x + w + spacer + w + spacer;
     y_app3 = y;
     // App 4 (Time, Date)

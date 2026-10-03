@@ -2,7 +2,8 @@
 #define POWER_H
 
 /*----------LIBS----------*/
-#include "display/display.h"
+//#include "display/display.h"
+#include "apps/app.h"
 #include <XPowersLib.h>
 #include "Wire.h"
 

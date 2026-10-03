@@ -2,7 +2,8 @@
 #define FUNCTIONS_H
 
 /*----------LIBS----------*/
-#include "display/display.h"
+//#include "display/display.h"
+#include "apps/app.h"
 
 /*----------Global----------*/
 
@@ -12,10 +13,13 @@ void clear();
 void timeout();
 void print(const char* text);
 
+/*----------CLASSES----------*/
 class Button {
 public:
     const char* name;
     int x, y, w, h;
+    int a, b;
+    bool x_asis;
     uint16_t color;
     const uint8_t* img;
     // int img_size;
@@ -26,6 +30,7 @@ public:
 
     void draw(const char* text, uint16_t text_color, uint8_t font_size);
     void hit(TouchPoint touch, void (*function)());
+    bool swipe(TouchPoint touch, int a, int b, bool x_asis);
 };
 
 #endif

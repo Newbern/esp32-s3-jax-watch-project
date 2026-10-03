@@ -2,11 +2,12 @@
 #define CLOCK_H
 
 /*----------LIBS----------*/
-#include "display/display.h"
+//#include "display/display.h"
 // RTC Functions
 #include "SensorPCF85063.hpp"
 #include "Wire.h"
-#include "functions/functions.h"
+//#include "functions/functions.h"
+#include "apps/app.h"
 
 
 extern SensorPCF85063 rtc;

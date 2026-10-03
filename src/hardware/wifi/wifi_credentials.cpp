@@ -1,5 +1,6 @@
-#ifndef WIFI_CREDENTIALS_H
-#define WIFI_CREDENTIALS_H
+//#ifndef WIFI_CREDENTIALS_H
+//#define WIFI_CREDENTIALS_H
+#include "wifi.h"
 
 // Wifi's
 const char* ssids[] = {
@@ -14,4 +15,4 @@ const char* passwords[] = {
 // Wifi loop
 const int wifi_count = 1;
 
-#endif
+//#endif

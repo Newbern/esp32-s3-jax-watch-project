@@ -1,9 +1,9 @@
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
-#include "functions/functions.h"
-#include "media/images.h"
-
+//#include "functions/functions.h"
+//#include "media/images.h"
+#include "apps/app.h"
 /*---------- PRE APPS CLASS----------*/
 //#pragma once
 

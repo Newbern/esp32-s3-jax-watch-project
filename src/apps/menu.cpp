@@ -1,8 +1,9 @@
-#include "app.h"
-
+#include "apps/app.h"
+#include "settings/settings.h"
 void menu_setup() {
     battery_setup();
     clock_setup();
+    launcher_setup();
 }
 
 void show_date(const char* text, Button* button) {
@@ -30,11 +31,11 @@ void menu_run(TouchPoint pressed) {
 
 
     // Button being Pressed
-    wifiButton->hit(pressed, nothing);
+    //wifiButton->hit(pressed, nothing);
     //jaxButton->hit(pressed, nothing);
     //batteryButton->hit(pressed, nothing);
     //clockButton->hit(pressed, nothing);
     //weatherButton->hit(pressed, nothing);
-    //appsButton->hit(pressed, nothing);
+    appsButton->hit(pressed, launcher_run);
 
 }

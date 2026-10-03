@@ -1,12 +1,21 @@
 #ifndef APP_H
 #define APP_H
 
-/*----------LIBS----------*/
-// #include "functions/functions.h"
-#include "clock/clock.h"
-#include "power/power.h"
-#include "wifi/wifi.h"
-#include "settings/settings.h"
+
+/*----------HELPERS----------*/
+#include "hardware/display/display.h"
+#include "media/images.h"
+#include "functions/functions.h"
+
+/*----------HARDWARE----------*/
+#include "hardware/clock/clock.h"
+#include "hardware/power/power.h"
+#include "hardware/wifi/wifi.h"
+#include "hardware/storage/storage.h"
+
+/*----------MODULES----------*/
+//#include "apps/settings/settings.h"
+//#include "apps/modules/other/other_apps.h"
 
 /*----------FUNCTIONS----------*/
 // Serial
@@ -33,8 +42,13 @@ void menu_run(TouchPoint pressed);
 bool wifi_setup();
 void api_test();
 
-// Test
-void test_setup();
-void test_run();
+// Jax
+// System/Battery
+//Clock/calender
+//weather
+
+// Other Apps
+void launcher_setup();
+void launcher_run();
 
 #endif

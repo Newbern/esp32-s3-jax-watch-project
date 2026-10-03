@@ -1,4 +1,4 @@
-#include "app.h"
+#include "apps/app.h"
 
 void time_setup() {
     clock_setup();

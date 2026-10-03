@@ -1,4 +1,4 @@
-#include "app.h"
+#include "apps/app.h"
 
 void serial_setup() {
     Serial.begin(115200);
