@@ -64,16 +64,39 @@ void Button::draw(const char* text, uint16_t text_color, uint8_t font_size)
 
 }
 
-// Button Logic for when the Button area is pressed
-void Button::hit(TouchPoint touch, void (*function)())
+// Button Logic for when the Button area is pressed with TouchPoint parameter
+void Button::hit(TouchPoint pressed, void (*function)(TouchPoint))
 {
-    if (!touch.pressed)
+    if (!pressed.pressed)
         return;
 
-    if (touch.x >= x &&
-        touch.x <= x + w &&
-        touch.y >= y &&
-        touch.y <= y + h)
+    if (pressed.x >= x &&
+        pressed.x <= x + w &&
+        pressed.y >= y &&
+        pressed.y <= y + h)
+    {
+        if (function != nullptr)
+        {
+            merge_print("Running %s", name);
+            clear();
+            function(pressed);
+            timeout();
+            clear();
+
+        }
+    }
+}
+
+// Button Logic for when the Button area is pressed without TouchPoint parameter
+void Button::hit(TouchPoint pressed, void (*function)())
+{
+    if (!pressed.pressed)
+        return;
+
+    if (pressed.x >= x &&
+        pressed.x <= x + w &&
+        pressed.y >= y &&
+        pressed.y <= y + h)
     {
         if (function != nullptr)
         {

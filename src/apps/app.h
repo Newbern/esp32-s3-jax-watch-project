@@ -49,6 +49,6 @@ void api_test();
 
 // Other Apps
 void launcher_setup();
-void launcher_run();
+void launcher_run(TouchPoint pressed);
 
 #endif

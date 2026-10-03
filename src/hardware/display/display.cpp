@@ -1,5 +1,5 @@
-
 #include "display.h"
+#include "apps/app.h"
 /*----------HERE----------*/
 /*----------SETUP----------*/
 Arduino_DataBus *bus = nullptr;
@@ -30,79 +30,109 @@ void display_setup() {
     );
 }
 
+// Touch Screen Setup
 TouchDrvFT6X36 touch;
 bool touchReady = false;
 unsigned long lastTouch = 0;
-
-void touch_setup() {
-    touchReady = touch.begin(Wire);
-    
-
-    if (!touchReady) {
-        Serial.println("Touch FAILED");
-    } else {
-        Serial.println("Touch OK");
-    }
-
-    gfx->displayOn();
-    displayOn = true;
-    lastTouch = millis();
-
-}
-
-
-TouchPoint touch_run(void (*function)())
-{
-    TouchPoint point = {false, 0, 0};
-
-    if (!touchReady)
-        return point;
-
-    if (touch.isPressed())
-    {
-        int16_t x[1];
-        int16_t y[1];
-
-        wake();
-
-        if (touch.getPoint(x, y) > 0)
-        {
-            point.pressed = true;
-            point.x = x[0];
-            point.y = y[0];
-
-            lastTouch = millis();
-
-            if (function != nullptr)
-            {
-                function();
-            }
-        }
-    }
-
-    if (millis() - lastTouch > 5000)
-    {
-        sleep();
-    }
-
-    return point;
-}
-
 bool displayOn = true;
+
+// Display Sleep Function
 void sleep() 
 {
+    // If the display is already off, return
     if (!displayOn)
         return;
 
+    // Turn off the display
     gfx->displayOff();
     displayOn = false;
 }
 
+// Display Wake Function
 void wake()
 {
+    // If the display is already on, return
     if (displayOn)
         return;
 
+    // Turn on the display
     gfx->displayOn();
     displayOn = true;
 }
+
+// Touch Screen Setup
+void touch_setup() {
+    // Connecting to the touch screen using the Wire library, this is the bus that the touch screen uses to communicate with the microcontrollar
+    touchReady = touch.begin(Wire);
+    
+    // Checking if the touch screen is ready and printing the result to the serial monitor
+    if (!touchReady) {
+        print("Touch FAILED");
+    } else {
+        print("Touch OK");
+    }
+
+    
+    wake(); // Wake the display on startup
+    lastTouch = millis(); // Record the last time the display was touched
+
+}
+
+// Touch Screen Run Function
+TouchPoint touch_run()
+{
+    // Release pointer 
+    static bool waitingForRelease = false;
+
+    // Createing Point
+    TouchPoint point = {false, 0, 0};
+
+    // Touch screen is not ready 
+    if (!touchReady)
+        return point;
+    
+    // Checking if the touch screen is pressed
+    bool pressed = touch.isPressed();
+
+    // Resetting  when point is released
+    if (!pressed) {
+        waitingForRelease = false;
+    }
+    
+    // Processing only the first touch
+    else if (!waitingForRelease)
+    {
+        // Getting Position
+        int16_t x[1];
+        int16_t y[1];
+
+
+        // Returning active postion if its actually being presseed
+        if (touch.getPoint(x, y) > 0)
+        {   // Ignore if the touch is still being pressed
+            waitingForRelease = true;
+            // Waking Display Screen
+            wake();
+
+            // Returning pressed & pointer positions
+            point.pressed = true;
+            point.x = x[0];
+            point.y = y[0];
+
+            // Recording last time pointer was touched
+            lastTouch = millis();
+        }
+    }
+
+    // Getting curent time and checking with past time
+    if (millis() - lastTouch > 5000)
+    {
+        // Turning Display Off
+        sleep();
+    }
+
+    // Returning pointer values
+    return point;
+}
+
+

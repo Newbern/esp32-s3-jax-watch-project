@@ -29,6 +29,7 @@ public:
     Button(const char* name, int x, int y, int w, int h, int color, const uint8_t* img);
 
     void draw(const char* text, uint16_t text_color, uint8_t font_size);
+    void hit(TouchPoint touch, void (*function)(TouchPoint));
     void hit(TouchPoint touch, void (*function)());
     bool swipe(TouchPoint touch, int a, int b, bool x_asis);
 };

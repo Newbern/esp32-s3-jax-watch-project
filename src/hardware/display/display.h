@@ -25,7 +25,7 @@ extern bool displayOn;
 /*----------FUNCTIONS----------*/
 void display_setup();
 void touch_setup();
-TouchPoint touch_run(void (*function)());
+TouchPoint touch_run();
 void sleep();
 void wake();
 

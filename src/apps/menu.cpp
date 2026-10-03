@@ -16,18 +16,18 @@ void show_date(const char* text, Button* button) {
 
 void menu_run(TouchPoint pressed) {
 
-    if (pressed.pressed) {
+    
 
-        // Drawing Buttons
-        wifiButton->draw(wifi.name().c_str(), BLACK, 2);
-        jaxButton->draw("JAX", BLACK, 2);
-        batteryButton->draw(battery_run(), BLACK, 2);
-        clockButton->draw(clock_run(), BLACK, 10); // time only -> 10,     time & date -> 4
-        show_date(date_run(), clockButton);
-        weatherButton->draw("weather", BLACK, 2);
-        appsButton->draw("apps", BLACK, 2);
+    // Drawing Buttons
+    wifiButton->draw(wifi.name().c_str(), BLACK, 2);
+    jaxButton->draw("JAX", BLACK, 2);
+    batteryButton->draw(battery_run(), BLACK, 2);
+    clockButton->draw(clock_run(), BLACK, 10); // time only -> 10,     time & date -> 4
+    show_date(date_run(), clockButton);
+    weatherButton->draw("weather", BLACK, 2);
+    appsButton->draw("apps", BLACK, 2);
 
-    }
+    
 
 
     // Button being Pressed
