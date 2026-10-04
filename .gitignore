@@ -1,3 +1,20 @@
-.pio
-.vscode
+# PlatformIO
+.pio/
+.piolibdeps/
 
+# VS Code
+.vscode/
+
+# Build / compiled files
+*.o
+*.elf
+*.bin
+*.map
+build/
+
+# Secrets
+include/wifi_credentials.h
+
+# OS files
+.DS_Store
+Thumbs.db
