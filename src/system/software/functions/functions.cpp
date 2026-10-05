@@ -88,7 +88,7 @@ void Button::hit(TouchPoint pressed, void (*function)(TouchPoint))
 }
 
 // Button Logic for when the Button area is pressed without TouchPoint parameter
-void Button::hit(TouchPoint pressed, void (*function)())
+void Button::hit(TouchPoint pressed, int app_id)
 {
     if (!pressed.pressed)
         return;
@@ -98,15 +98,7 @@ void Button::hit(TouchPoint pressed, void (*function)())
         pressed.y >= y &&
         pressed.y <= y + h)
     {
-        if (function != nullptr)
-        {
-            merge_print("Running %s", name);
-            clear();
-            function();
-            timeout();
-            clear();
-
-        }
+        open_app(app_id); 
     }
 }
 

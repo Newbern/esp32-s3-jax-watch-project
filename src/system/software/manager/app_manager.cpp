@@ -1,8 +1,10 @@
 #include "app_manager.h"
 
-int current_app = -1;
+int current_app = APP_MENU;
 
 void app_manager_setup() {
+    current_app = APP_MENU;
+
     for (int i = 0; i < app_count; i++) {
         if (apps_list[i].setup) {
             apps_list[i].setup();
@@ -16,14 +18,10 @@ void open_app(int app_id) {
     }
 
     current_app = app_id;
-
-    if (apps_list[current_app].setup) {
-        apps_list[current_app].setup();
-    }
 }
 
 void return_to_menu() {
-    current_app = -1;
+    current_app = APP_MENU;
 }
 
 void app_manager_run(TouchPoint pressed) {
@@ -31,7 +29,5 @@ void app_manager_run(TouchPoint pressed) {
         if (apps_list[current_app].run) {
             apps_list[current_app].run(pressed);
         }
-    } else {
-        menu_run(pressed);
     }
 }

@@ -16,11 +16,11 @@
 /*----------MODULES----------*/
 //#include "apps/settings/settings.h"
 //#include "apps/modules/other/other_apps.h"
-#include "system/software/launcher/launcher.h"
+//#include "system/software/launcher/launcher.h"
 
 /*----------FUNCTIONS----------*/
 // Settings
-void settings_setup();
+//void settings_setup();
 
 // App setup
 void app_setup();
@@ -30,25 +30,14 @@ void app_run();
 void startup_setup();
 void startup_run();
 
-//// Menu
-void menu_setup();
-void menu_run(TouchPoint pressed);
-//// void menu_backend();
-
 // WIFI
 bool wifi_setup();
-//void api_test();
 
-// Jax
-// System/Battery
-//Clock/calender
-//weather
-
-//// Other Apps
-void launcher_setup();
-void launcher_run(TouchPoint pressed);
-
-//app_manager_setup();
+// Application Manager
+void app_manager_setup();
 void app_manager_run(TouchPoint pressed);
+void open_app(int app_id);
+void return_to_menu();
+
 
 #endif

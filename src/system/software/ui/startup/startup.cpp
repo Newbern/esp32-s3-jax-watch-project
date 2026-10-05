@@ -1,4 +1,4 @@
-#include "system/software/run/app.h"
+#include "startup.h"
 
 void startup_setup() {
     // Wire Setup
