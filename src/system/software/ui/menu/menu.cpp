@@ -98,6 +98,6 @@ void menu_run(TouchPoint pressed) {
     //batteryButton->hit(pressed, nothing);
     //clockButton->hit(pressed, nothing);
     //weatherButton->hit(pressed, nothing);
-    appsButton->hit(pressed, launcher_run);
+    appsButton->hit(pressed, APP_LAUNCHER);
 
 }

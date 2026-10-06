@@ -77,17 +77,14 @@ void Button::hit(TouchPoint pressed, void (*function)(TouchPoint))
     {
         if (function != nullptr)
         {
-            merge_print("Running %s", name);
-            clear();
             function(pressed);
             timeout();
-            clear();
 
         }
     }
 }
 
-// Button Logic for when the Button area is pressed without TouchPoint parameter
+// Button Logic for when the Button area is pressed with AppID parameter
 void Button::hit(TouchPoint pressed, int app_id)
 {
     if (!pressed.pressed)
@@ -102,6 +99,22 @@ void Button::hit(TouchPoint pressed, int app_id)
     }
 }
 
+void Button::run(TouchPoint pressed, void (*function)())
+{
+    if (!pressed.pressed)
+        return;
+
+    if (pressed.x >= x &&
+        pressed.x <= x + w &&
+        pressed.y >= y &&
+        pressed.y <= y + h)
+    {
+        if (function != nullptr)
+        {
+            function();
+        }
+    }
+}
 // Button Logic for when swiped
 bool Button::swipe(TouchPoint touch, int a, int b, bool x_axis) {
     if (!touch.pressed) {

@@ -3,12 +3,14 @@
 
 // UI
 #include "system/software/ui/menu/menu.h"
-#include "system/software/launcher/launcher.h"
+//#include "system/software/launcher/launcher.h"
 
 // Apps
 #include "apps/apps.h"
 
 //#pragma once
+
+extern int current_app;
 
 enum AppID {
     APP_MENU = 0,

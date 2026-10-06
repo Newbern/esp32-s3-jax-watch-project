@@ -20,10 +20,10 @@ void app_run(){
     // Running Main Menu
     TouchPoint pressed = touch_run();
     
-    // if (pressed.pressed) {
-    //     app_manager_run(pressed);
-    // }
-    app_manager_run(pressed);
+    if (pressed.pressed) {
+        app_manager_run(pressed);
+    }
+    // app_manager_run(pressed);
     
     
 }

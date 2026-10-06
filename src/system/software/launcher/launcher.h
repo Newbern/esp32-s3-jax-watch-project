@@ -8,6 +8,6 @@ void launcher_setup();
 void launcher_run(TouchPoint pressed);
 void nothing();
 
-extern int selected_app;
+//extern int selected_app;
 
 #endif

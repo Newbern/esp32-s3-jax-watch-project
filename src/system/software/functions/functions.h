@@ -31,6 +31,7 @@ public:
     void draw(const char* text, uint16_t text_color, uint8_t font_size);
     void hit(TouchPoint touch, void (*function)(TouchPoint));
     void hit(TouchPoint touch, int app_id);
+    void run(TouchPoint touch, void (*function)());
     bool swipe(TouchPoint touch, int a, int b, bool x_asis);
 };
 
