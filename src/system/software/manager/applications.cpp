@@ -8,7 +8,7 @@ AppEntry apps_list[] = {
     {APP_CLOCK, "Clock", GREEN, time_setup, time_run},
     {APP_INTERNET, "Internet", BLUE, internet_setup, internet_run},
     {APP_ROKU, "Roku", YELLOW, roku_setup, roku_run},
-    {APP_TEST_APP, "Test App", BLUE, nullptr, nullptr}
+    {APP_TEST_APP, "Test App", BLUE, test_setup, test_run}
 };
 
 const int app_count = sizeof(apps_list) / sizeof(apps_list[0]);

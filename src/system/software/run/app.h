@@ -36,7 +36,7 @@ bool wifi_setup();
 // Application Manager
 void app_manager_setup();
 void app_manager_run(TouchPoint pressed);
-void open_app(TouchPoint pressed, int app_id);
+void open_app(int app_id);
 void return_to_menu();
 
 

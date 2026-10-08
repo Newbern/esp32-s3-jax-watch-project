@@ -95,8 +95,8 @@ void Button::hit(TouchPoint pressed, int app_id)
         pressed.y >= y &&
         pressed.y <= y + h)
     {
-        clear();
-        open_app(pressed, app_id); 
+        //clear();
+        open_app(app_id); 
     }
 }
 

@@ -1,18 +1,17 @@
 #include "app.h"
 
 void app_setup(){
-    // Display Setup
+    // Hardware setup
     display_setup();
-    //settings_setup();
-    // Custom System setup
-    startup_setup();
-    // Main Menu Setup
-    app_manager_setup();
-    //test_setup();
-    // Touch Setup
     touch_setup();
-    // Running Startup system
+
+    // System startup 
+    startup_setup();
     startup_run();
+
+    // Software setup
+    app_manager_setup();
+    wake();
 }
 
 

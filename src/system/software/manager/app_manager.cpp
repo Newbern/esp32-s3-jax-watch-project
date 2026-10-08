@@ -2,39 +2,62 @@
 
 int current_app = APP_MENU;
 
-void app_manager_setup() {
+AppEntry* get_app(int app_id)
+{
+    for (int i = 0; i < app_count; i++)
+    {
+        if (apps_list[i].id == app_id)
+        {
+            return &apps_list[i];
+        }
+    }
+
+    return nullptr;
+}
+
+void app_manager_setup()
+{
     current_app = APP_MENU;
 
+    AppEntry* app = get_app(current_app);
 
-    if (apps_list[current_app].setup) {
-        apps_list[current_app].setup();
+    if (app && app->setup)
+    {
+        app->setup();
     }
 }
 
-void open_app(TouchPoint pressed, int app_id) {
-    if (app_id < 0 || app_id >= app_count) {
+void open_app(int app_id)
+{
+    AppEntry* app = get_app(app_id);
+
+    if (!app)
+    {
         return;
     }
 
     current_app = app_id;
-    
-    if (apps_list[app_id].setup) {
-        apps_list[app_id].setup();
-    }
 
-    if (apps_list[app_id].run) {
-        apps_list[app_id].run(pressed);
+    print("Opening app: ");
+    print(app->name);
+
+    if (app->setup)
+    {
+        app->setup();
     }
 }
 
-void return_to_menu() {
+void return_to_menu()
+{
     current_app = APP_MENU;
 }
 
-void app_manager_run(TouchPoint pressed) {
-    if (current_app >= 0 && current_app < app_count) {
-        if (apps_list[current_app].run) {
-            apps_list[current_app].run(pressed);
-        }
+void app_manager_run(TouchPoint pressed)
+{
+    AppEntry* app = get_app(current_app);
+
+    if (app && app->run)
+    {
+        app->run(pressed);
     }
 }
