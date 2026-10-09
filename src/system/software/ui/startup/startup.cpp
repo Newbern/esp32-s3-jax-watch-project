@@ -11,6 +11,8 @@ void startup_setup() {
         Serial.println("gfx->begin() failed!");
         while (1);
     }
+
+    print("Startup Setup Initialized\n");
     
 }
 
@@ -22,6 +24,7 @@ void startup_setup() {
 // }
 
 void startup_run() {
+    print("Startup Run Initialized\n");
     // Getting Screen Dimensions
     int screen_w = gfx->width();
     int screen_h = gfx->height();

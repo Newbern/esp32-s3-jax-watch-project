@@ -17,6 +17,7 @@ AppEntry* get_app(int app_id)
 
 void app_manager_setup()
 {
+    print("App Manager Setup Initialized\n");
     current_app = APP_MENU;
 
     AppEntry* app = get_app(current_app);
@@ -29,6 +30,8 @@ void app_manager_setup()
 
 void open_app(int app_id)
 {
+    print("Opening app with ID: ");
+    print(std::to_string(app_id).c_str());
     AppEntry* app = get_app(app_id);
 
     if (!app)
@@ -45,15 +48,20 @@ void open_app(int app_id)
     {
         app->setup();
     }
+
+    clear();
 }
 
 void return_to_menu()
 {
+    print("Returning to menu\n");
     current_app = APP_MENU;
 }
 
 void app_manager_run(TouchPoint pressed)
 {
+    print("Running app with ID: ");
+    print(std::to_string(current_app).c_str());
     AppEntry* app = get_app(current_app);
 
     if (app && app->run)

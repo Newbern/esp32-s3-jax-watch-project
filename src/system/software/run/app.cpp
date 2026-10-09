@@ -3,10 +3,11 @@
 void app_setup(){
     // Hardware setup
     display_setup();
+    startup_setup(); // Contains Wire.begin() for I2C communication & other startup hardware setups
     touch_setup();
 
     // System startup 
-    startup_setup();
+    
     startup_run();
 
     // Software setup

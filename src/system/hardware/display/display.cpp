@@ -28,11 +28,14 @@ void display_setup() {
       0, // col_offset2 
       0 // row_offset2
     );
+
+    Serial.begin(115200);
+    print("Display Setup Initialized\n");
 }
 
 // Touch Screen Setup
 TouchDrvFT6X36 touch;
-bool touchReady = false;
+bool touchReady = true;
 unsigned long lastTouch = 0;
 bool displayOn = true;
 
@@ -72,7 +75,7 @@ void touch_setup() {
         print("Touch OK");
     }
 
-    
+    print("Touch Setup Initialized\n");
     wake(); // Wake the display on startup
     lastTouch = millis(); // Record the last time the display was touched
 

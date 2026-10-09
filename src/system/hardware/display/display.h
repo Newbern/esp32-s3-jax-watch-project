@@ -22,6 +22,8 @@ extern Arduino_DataBus *bus;
 extern Arduino_GFX *gfx;
 extern TouchDrvFT6X36 touch;
 extern bool displayOn;
+extern bool touchReady;
+extern unsigned long lastTouch;
 /*----------FUNCTIONS----------*/
 void display_setup();
 void touch_setup();

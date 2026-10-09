@@ -37,34 +37,6 @@ void launcher_setup() {
     M_Button = new Button("Open_App", x + w + spacer, y, w * 3 - (spacer * 2), h, apps_list[selected_app].color, epd_bitmap_icons8_home_50);
 }
 
-void draw_current_app() {
-    int screen_w = gfx->width();
-    int screen_h = gfx->height();
-    int spacer = 5;
-    int outside = 10;
-    int x = outside;
-    int y = screen_h / 2.9;
-    int w = screen_w / 5;
-    int h = screen_h / 2.4;
-
-    gfx->fillRect(
-        x + w + spacer,
-        y,
-        w * 3 - (spacer * 2),
-        h,
-        apps_list[selected_app].color
-    );
-
-    say(
-        apps_list[selected_app].name,
-        x + w + spacer,
-        y,
-        w * 3 - (spacer * 2),
-        h,
-        BLACK,
-        4
-    );
-}
 
 void launcher_run(TouchPoint pressed) {
     // Button Logic
@@ -73,11 +45,10 @@ void launcher_run(TouchPoint pressed) {
     R_Button->draw("RIGHT",BLACK,2);
     M_Button->draw(apps_list[selected_app].name, BLACK,2);
 
-    //draw_current_app();
 
     L_Button->run(pressed, previous_app);
     R_Button->run(pressed, next_app);
-    M_Button->hit(pressed, selected_app);
+    M_Button->hit(pressed, apps_list[selected_app].id);
 
     
 
