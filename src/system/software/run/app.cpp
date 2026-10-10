@@ -2,6 +2,8 @@
 
 void app_setup(){
     // Hardware setup
+    Serial.begin(115200);
+    delay(500);
     display_setup();
     startup_setup(); // Contains Wire.begin() for I2C communication & other startup hardware setups
     touch_setup();
@@ -23,7 +25,7 @@ void app_run(){
     if (pressed.pressed) {
         app_manager_run(pressed);
     }
-    // app_manager_run(pressed);
+    
     
     
 }

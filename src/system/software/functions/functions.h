@@ -10,8 +10,11 @@
 /*----------FUNCTIONS----------*/
 void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t size);
 void clear();
+void clear_print();
 void timeout();
 void print(const char* text);
+void merge_print(const char* text, const char* var);
+const char* str(int text);
 
 /*----------CLASSES----------*/
 class Button {

@@ -2,10 +2,12 @@
 
 // Menu Setup
 void menu_setup() {
+    print("System | Menu  | Initializing");
     battery_setup();
     clock_setup();
+    // Creating Buttons
     menu_layout();
-    launcher_setup();
+    clear_print();
 }
 
 // Menu Buttons
@@ -61,6 +63,7 @@ void menu_layout() {
     int h_app6 = ((screen_h - spacer * 3 - outside * 2 ) / 4);
 
     // Buttons
+    print("System | Menu | Creating Buttons...\n");
     wifiButton = new Button("wifi", x_app1, y_app1, w, h, RED, epd_bitmap_icons8_home_50);
     jaxButton = new Button ("Jax_server", x_app2, y_app2, w, h, PURPLE, epd_bitmap_icons8_home_50);
     batteryButton = new Button("Batter Level", x_app3, y_app3, w, h, GREEN, epd_bitmap_icons8_home_50);

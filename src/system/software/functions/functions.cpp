@@ -20,7 +20,13 @@ void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t s
 
 // Clears Screen Black
 void clear() {
+    print("System | Display | Clear: Screen");
     gfx->fillScreen(BLACK);
+}
+
+void clear_print() {
+    //Serial.print("\033[2J\033[H");
+    print("\n------------------------------------------\n\n\n\n\n------------------------------------------\n");
 }
 
 // Timeout
@@ -40,6 +46,13 @@ void merge_print(const char* text, const char* var){
     print(message);
 }
 
+const char* str(int text)
+{
+    static std::string result;
+    result = std::to_string(text);
+    return result.c_str();
+}
+
 // Button Class
 Button::Button(const char* name, int x, int y, int w, int h, int color, const uint8_t* img)
 {
@@ -52,7 +65,10 @@ Button::Button(const char* name, int x, int y, int w, int h, int color, const ui
     this->img = img;
     this->img_width = 50;
     this->img_height = 50;
-    merge_print("Createing %s Button", name);
+
+    
+    merge_print("System | Function | %s_Button", name);
+    
 }
 
 // Draws Button class Object

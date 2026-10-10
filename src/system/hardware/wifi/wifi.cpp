@@ -11,17 +11,16 @@ bool Wifi::setup() {
 
     for (int i = 0; i < wifi_count; i++) {
 
-        Serial.print("Connecting to ");
-        Serial.println(ssids[i]);
+        clear_print();
+        merge_print("System | Wifi | Connecting: %s", ssids[i]);
 
         WiFi.begin(ssids[i], passwords[i]);
 
         for (int attempt = 0; attempt < 5; attempt++) {
 
             if (WiFi.status() == WL_CONNECTED) {
-                Serial.println();
-                Serial.println("WiFi connected!");
-                Serial.println(WiFi.localIP());
+                merge_print("\nSystem | Wifi | %s: Connected", ssids[i]);
+                merge_print("System | Wifi | Local IP: %s", str(WiFi.localIP()));
 
                 return true;
             }
@@ -30,13 +29,12 @@ bool Wifi::setup() {
             Serial.print(".");
         }
 
-        Serial.println();
-        Serial.println("Connection failed!");
+        Serial.println("\nSystem | Wifi | Connection: Failed\n");
 
         WiFi.disconnect();
     }
 
-    Serial.println("No WiFi available.");
+    Serial.println("System | Wifi | Connection: Not Available\n");
     return false;
 }
 

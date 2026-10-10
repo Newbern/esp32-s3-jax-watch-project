@@ -34,7 +34,7 @@ struct AppEntry {
 extern AppEntry apps_list[];
 extern const int app_count;
 
-
+AppEntry* get_app(int app_id);
 void app_manager_setup();
 void app_manager_run(TouchPoint pressed);
 void open_app(int app_id);

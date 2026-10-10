@@ -2,17 +2,27 @@
 
 void startup_setup() {
     // Wire Setup
-    Wire.begin(I2C_SDA, I2C_SCL);
+    print("System | Startup | Initializing");
 
-    Serial.println("Starting Display...");
+    // Running Wire
+    if (Wire.begin(I2C_SDA, I2C_SCL))
+    {
+        print("System | Startup | Wire: Successful\n");
+    }
+
+    else
+    {
+        print("System | Startup | Wire: Failed\n");
+    }
+    
+
+    
 
     if (!gfx->begin())
     {
-        Serial.println("gfx->begin() failed!");
+        Serial.println("System | Startup | Error: gfx->begin() failed!");
         while (1);
     }
-
-    print("Startup Setup Initialized\n");
     
 }
 
@@ -24,7 +34,6 @@ void startup_setup() {
 // }
 
 void startup_run() {
-    print("Startup Run Initialized\n");
     // Getting Screen Dimensions
     int screen_w = gfx->width();
     int screen_h = gfx->height();
