@@ -74,8 +74,8 @@ Button::Button(const char* name, int x, int y, int w, int h, int color, const ui
 // Draws Button class Object
 void Button::draw(const char* text, uint16_t text_color, uint8_t font_size)
 {
-    gfx->fillRect(x, y, w, h, color);
-    say(text, x, y, w, h, text_color, font_size);
+    gfx->fillRect(x, y, w, h, BLACK);
+    say(text, x, y, w, h, WHITE, font_size);
     
 
 }
@@ -112,7 +112,7 @@ void Button::hit(TouchPoint pressed, int app_id)
         pressed.y <= y + h)
     {
         //clear();
-        open_app(app_id); 
+        open_app(pressed, app_id); 
     }
 }
 

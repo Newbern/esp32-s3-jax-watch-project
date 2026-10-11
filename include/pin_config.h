@@ -23,8 +23,8 @@
 
 // PCF85063 RTC
 #define Interrupt 39
-#define I2C_SDA 15
-#define I2C_SCL 14
+//#define I2C_SDA 15
+//#define I2C_SCL 14
 
 // SD CARD
 // const int MOSI = 1;

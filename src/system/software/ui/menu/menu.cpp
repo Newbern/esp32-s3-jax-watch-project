@@ -26,7 +26,7 @@ void menu_layout() {
 
     // Getting Spacers & Outside Spaces
     int spacer = 10;
-    int outside = 25;
+    int outside = 20;
 
     // Setting Width & Height
     int w = (screen_w - spacer * 2 - outside * 2) / 3;
@@ -54,12 +54,12 @@ void menu_layout() {
     // App 5 (Weather)
     int x_app5 = x;
     int y_app5 = y + ((screen_h - spacer * 3 - outside * 2 ) / 4) * 3 + spacer * 2;
-    int w_app5 = ((screen_w - spacer * 2 - outside * 2 ) / 2);
+    int w_app5 = ((screen_w - spacer * 1 - outside * 2 ) / 2);
     int h_app5 = ((screen_h - spacer * 3 - outside * 2 ) / 4);
     // App 6 (Other Apps)
-    int x_app6 = x + ((screen_w - spacer * 2 - outside * 2 ) / 2) + spacer;
+    int x_app6 = x + ((screen_w - spacer * 1 - outside * 2 ) / 2) + spacer;
     int y_app6 = y + ((screen_h - spacer * 3 - outside * 2 ) / 4) * 3 + spacer * 2;
-    int w_app6 = ((screen_w - spacer * 2 - outside * 2 ) / 2);
+    int w_app6 = ((screen_w - spacer * 1 - outside * 2 ) / 2);
     int h_app6 = ((screen_h - spacer * 3 - outside * 2 ) / 4);
 
     // Buttons

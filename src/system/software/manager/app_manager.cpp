@@ -27,10 +27,9 @@ void app_manager_setup()
     // Starting on the Menu App
     clear_print();
     print("Application Manager | Setup | Initializing");
-    current_app = APP_MENU;
 
     // Getting the Menu App data
-    AppEntry* app = get_app(current_app);
+    AppEntry* app = get_app(APP_MENU);
 
     // Setting up Menu data with menu_setup
     if (app && app->setup)
@@ -41,7 +40,7 @@ void app_manager_setup()
     }
 }
 
-void open_app(int app_id)
+void open_app(TouchPoint pressed, int app_id)
 {
     // Getting App Data
     clear_print();
@@ -54,6 +53,7 @@ void open_app(int app_id)
         // If App doesn't exists return to main menu
         print("Application Manager | Opening App | Error: App does not exists\n");
         return_to_menu();
+        return;
     }
 
     
@@ -61,12 +61,12 @@ void open_app(int app_id)
     // Running app Setup
     if (app->setup)
     {
+        // Clearing Screen
+        clear();
         merge_print("Application Manager | Opening App | Running: %s_setup\n", app->name);
         app->setup();
+        app->run(pressed);
     }
-
-    // Clearing Screen
-    clear();
 }
 
 void return_to_menu()
