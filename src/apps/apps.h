@@ -3,6 +3,9 @@
 
 #include "system/software/run/app.h"
 
+void jax_setup();
+void jax_run(TouchPoint pressed);
+
 // Alarms
 void alarms_setup();
 void alarms_run(TouchPoint pressed);
