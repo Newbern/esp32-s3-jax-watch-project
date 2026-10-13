@@ -7,6 +7,7 @@
 // Jax Login
 void login()
 {
+    print("System | Jax | Login: Initializing");
     // Getting API_KEY
     String key = get_api_key();
     // Getting URL
@@ -22,8 +23,8 @@ void login()
     HTTPClient http;
 
     // Checking URL
-    if (!http.begin(url + "/auth/login")) {
-        print("System | Jax | HTTP: Initialization failed!");
+    if (!http.begin(url + "/auth/device-login")) {
+        print("System | Jax | HTTPS: Initialization failed!");
         return;
     }
 
@@ -48,10 +49,10 @@ void login()
     // Getting Response data
     String response = http.getString();
 
-    merge_print("System | Jax | Login: Response-> %s", str(responseCode));
-    merge_print("System | Jax | Login: Response-> %s", response.c_str());
+    merge_print("System | Jax | Login: Response Code-> %s", str(responseCode));
+    merge_print("System | Jax | Login: Response Body-> %s", response.c_str());
 
-    // If login Request is incorrect
+    // Request sent successfully
     if (responseCode == 200)
     {
         // Createing Json document object
@@ -60,68 +61,50 @@ void login()
         // Turning string into json document
         DeserializationError error = deserializeJson(doc, response);
 
-        // Getting Error
+        // JSON Error
         if (error)
         {
-            print("JSON parsing failed");
+            print("Systm | Jax | Login: Could not properly read json data\n");
+            
+            // Closing Http Connection
             http.end();
             return;
         }
 
+        // Getting data
         bool success = doc["success"];
 
+        // Saving correct login data
         if (success)
         {
             String token = doc["session"].as<String>();
 
             saveToken(token);
 
-            Serial.println("Login successful");
+            print("System | Jax | Login: Successful\n");
         }
+        // Incorrect Login data
         else
         {
-            Serial.println(doc["message"].as<String>());
+            print("System | Jax | Login: Failed");
+            String message = doc["message"].as<String>();
+            merge_print("System | Jax | Message: %s\n", message.c_str());
         }
     }
 
+    // Closing Http Connection
     http.end();
 }
 
 void jax_setup() {
-    
+    jax_storage_setup();
+    login();
 };
 
-void jax_run(TouchPoint pressed) {};
-
-
-
-
-
-
-
-
-
-void get_alarms() {
-    HTTPClient http;
-
-    http.begin("http://10.0.0.168:8000/alarm/get-alarms");
-
-    String sessiontoken = loadToken();
-
-    http.addHeader (
-        "Cookie",
-        "session_token=" + sessiontoken
-    )
-
-    int responseCode = http.GET();
-    String response = http.getString();
-
-    say(String(responseCode).c_str(), 50, 100, RED, 4);
-
-    if (responseCode > 0) {
-        say("Response:", 50, 150, RED, 4);
-        say(response.c_str(), 50, 200, RED, 4);
+void jax_run(TouchPoint pressed) {
+    say("JAX SERER", 200,100, 100,100, PURPLE, 8);
+    if (pressed.pressed) {
+        return_to_menu();
     }
+};
 
-    http.end();
-}

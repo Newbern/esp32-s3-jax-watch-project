@@ -20,7 +20,8 @@ enum AppID {
     APP_CLOCK = 4,
     APP_INTERNET = 5,
     APP_ROKU = 6,
-    APP_TEST = 7
+    APP_TEST = 7,
+    APP_JAX = 8
 };
 
 struct AppEntry {
