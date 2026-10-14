@@ -6,6 +6,7 @@
 void jax_storage_setup();
 void save_api_key(const String& api_key);
 String get_api_key();
+String get_token();
 void delete_api_key();
 
 #endif

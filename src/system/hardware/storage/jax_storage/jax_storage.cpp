@@ -20,6 +20,11 @@ String get_api_key() {
     return preferences.getString("api_key", "");
 }
 
+String get_token() {
+    // Returning Session token for applications
+    return preferences.getString("token", "");
+}
+
 void delete_api_key() {
     // Removing api key
     preferences.remove("api_key");
