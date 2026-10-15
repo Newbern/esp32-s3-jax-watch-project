@@ -3,14 +3,12 @@
 
 #include "system/software/run/app.h"
 #include "system/hardware/wifi/wifi.h"
-#include "jax_credentials.h"
-#include "system/hardware/storage/jax_storage/jax_stoarge.h"
+#include "apps/jax/jax.h"
 
-void jax_setup();
-void jax_run(TouchPoint pressed);
 
 // Alarms
 void alarms_setup();
+void alarms_get();
 void alarms_run(TouchPoint pressed);
 
 // Clock

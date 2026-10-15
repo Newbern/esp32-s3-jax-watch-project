@@ -1,32 +1,32 @@
-#include "storage.h"
+// #include "storage.h"
 
-Preferences preferences;
+// Preferences preferences;
 
-void saveToken(String token)
-{
-    preferences.begin("jax", false);
+// void saveToken(String token)
+// {
+//     preferences.begin("jax", false);
 
-    preferences.putString("token", token);
+//     preferences.putString("token", token);
 
-    preferences.end();
-}
+//     preferences.end();
+// }
 
-String loadToken()
-{
-    preferences.begin("jax", true);
+// String loadToken()
+// {
+//     preferences.begin("jax", true);
 
-    String token = preferences.getString("token", "");
+//     String token = preferences.getString("token", "");
 
-    preferences.end();
+//     preferences.end();
 
-    return token;
-}
+//     return token;
+// }
 
-void deleteToken()
-{
-    preferences.begin("jax", false);
+// void deleteToken()
+// {
+//     preferences.begin("jax", false);
 
-    preferences.remove("token");
+//     preferences.remove("token");
 
-    preferences.end();
-}
+//     preferences.end();
+// }

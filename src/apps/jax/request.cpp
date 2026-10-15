@@ -1,9 +1,11 @@
-#include "apps/apps.h"
+#include "apps/jax/jax.h"
 
 bool jax_request(
     const char* endpoint, 
     const String& body, 
-    JsonDocument& response) 
+    JsonDocument& response, 
+    bool post
+) 
     {
         print("System | Jax | HTTP: Initializing");
         
@@ -16,13 +18,22 @@ bool jax_request(
         // Checking endpoint url
         if (!http.begin(url + endpoint)) {
             print("System | Jax | HTTP: Initialization failed!");
+            return false;
         }
 
         // Createing Header
         http.addHeader("Content-Type", "application/json");
 
         // Sending body request
-        int responseCode = http.POST(body);
+        int responseCode;
+        
+        if (post) {
+             responseCode= http.POST(body);
+        }
+        else {
+            responseCode = http.GET();
+        }
+        
         // merge_print("System | Jax | Login: Request -> %s", body.c_str());
 
         // Getting Response code errors

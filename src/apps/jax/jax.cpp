@@ -1,5 +1,4 @@
 #include "apps/apps.h"
-#include "request.cpp"
 
 
 
@@ -31,7 +30,7 @@ void login()
     JsonDocument response;
     
     // Using Jax Http request
-    if (!jax_request("auth/device-login", body, response)) {
+    if (!jax_request("auth/device-login", body, response, true)) {
         return;
     }
 
@@ -40,7 +39,7 @@ void login()
     {
         // Getting data
         String session_token = response["session"].as<String>();
-        saveToken(session_token);
+        save_token(session_token);
         print("System | Jax | Login: Successful\n");
     }
     // Incorrect Login data

@@ -11,7 +11,7 @@
 #include "system/hardware/clock/clock.h"
 #include "system/hardware/power/power.h"
 #include "system/hardware/wifi/wifi.h"
-#include "system/hardware/storage/storage.h"
+//#include "system/hardware/storage/storage.h"
 
 /*----------MODULES----------*/
 //#include "apps/settings/settings.h"
