@@ -4,7 +4,8 @@ bool jax_request(
     const char* endpoint, 
     const String& body, 
     JsonDocument& response, 
-    bool post
+    bool post,
+    const String& token = ""
 ) 
     {
         print("System | Jax | HTTP: Initializing");
@@ -23,6 +24,11 @@ bool jax_request(
 
         // Createing Header
         http.addHeader("Content-Type", "application/json");
+
+        // TEMPORARY FOR NOW
+        if (!token.isEmpty()) {
+        http.addHeader("X-Session-Token", token);
+    }
 
         // Sending body request
         int responseCode;

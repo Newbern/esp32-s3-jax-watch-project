@@ -14,7 +14,8 @@ bool jax_request(
     const char* endpoint, 
     const String& body, 
     JsonDocument& response,
-    bool post
+    bool post,
+    const String& token
 );
 
 

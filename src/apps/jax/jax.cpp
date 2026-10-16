@@ -30,7 +30,7 @@ void login()
     JsonDocument response;
     
     // Using Jax Http request
-    if (!jax_request("auth/device-login", body, response, true)) {
+    if (!jax_request("auth/device-login", body, response, true, get_token())) {
         return;
     }
 
@@ -39,6 +39,7 @@ void login()
     {
         // Getting data
         String session_token = response["session"].as<String>();
+        print("System | Jax | Storage: Saved -> token");
         save_token(session_token);
         print("System | Jax | Login: Successful\n");
     }
@@ -49,6 +50,7 @@ void login()
         String message = response["message"].as<String>();
         merge_print("System | Jax | Message: %s\n", message.c_str());
     }
+
 
 }
 
