@@ -5,7 +5,8 @@ int current_app = APP_MENU;
 // Getting AppEntry from Addp id
 AppEntry* get_app(int app_id)
 {
-    merge_print("Application Manager | Getting AppEntry | ID: %s\n", str(app_id));
+    log("Getting AppEntry", str(app_id));
+    print("");
     // Checking through how many apps there are
     for (int i = 0; i < app_count; i++)
     {
@@ -26,7 +27,7 @@ void app_manager_setup()
 
     // Starting on the Menu App
     clear_print();
-    print("Application Manager | Setup | Initializing");
+    log("Setup","Initializing");
 
     // Getting the Menu App data
     AppEntry* app = get_app(APP_MENU);
@@ -34,9 +35,14 @@ void app_manager_setup()
     // Setting up Menu data with menu_setup
     if (app && app->setup)
     {
-        merge_print("Application Manager | Setup | Running: %s_setup\n", app->name);
+        log("Running", log_merge("%s_setup\n", app->name));
+        location = app->name;
         clear_print();
         app->setup();
+    }
+    else {
+        log("Error", "Theres a problem");
+        return;
     }
 }
 
@@ -44,26 +50,25 @@ void open_app(TouchPoint pressed, int app_id)
 {
     // Getting App Data
     clear_print();
-    print("Application Manager | Opening App | Initializing");
+    log("Opening App", "Initializing");
     AppEntry* app = get_app(app_id);
     
     // Checking to see if app exists 
     if (!app)
     {
         // If App doesn't exists return to main menu
-        print("Application Manager | Opening App | Error: App does not exists\n");
+        log("Opening App", "Error -> App does not exists\n");
         return_to_menu();
         return;
     }
-
-    
 
     // Running app Setup
     if (app->setup)
     {
         // Clearing Screen
         clear();
-        merge_print("Application Manager | Opening App | Running: %s_setup\n", app->name);
+        log("Opening App", log_merge("Running -> %s_setup\n", app->name));
+        location = app->name;
         app->setup();
         app->run(pressed);
     }
@@ -72,7 +77,7 @@ void open_app(TouchPoint pressed, int app_id)
 void return_to_menu()
 {
     clear_print();
-    print("Application Manager | Return to Main Menu | Setting: current_app = APP_MENU\n");
+    log("Return to Main Menu\n");
     current_app = APP_MENU;
 }
 
@@ -80,13 +85,14 @@ void app_manager_run(TouchPoint pressed)
 {
     // Getting Current App Data
     clear_print();
-    print("Application Manager | Running | Initializing");
+    log("Running", "Initializing");
     AppEntry* app = get_app(current_app);
 
     // Runnning Application
     if (app && app->run)
     {
-        merge_print("Application Manager | Running | Running: %s_run\n", app->name);
+        log("Running", log_merge("%s_run\n", app->name));
+        location = app->name;
         app->run(pressed);
     }
 }

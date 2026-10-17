@@ -1,12 +1,15 @@
 #include "logs.h"
 
-void log(const char* location, const char* app, const char* action, const char* bonus = "") {
-    String body = String(location) + " | " + app + " | " + action;
+const char* source = "LOG";
+const char* location = "LOG";
+
+void log(const char* action, const char* bonus) {
+    String body = String(source) + " | " + String(location) + " | " + action;
 
     if (bonus[0] != '\0') {
-        body += " -> ";
+        body += ": ";
         body += bonus;
     }
 
-    Serial.println(body);
+    print(body.c_str());
 }

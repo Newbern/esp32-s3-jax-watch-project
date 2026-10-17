@@ -6,6 +6,7 @@
 #include "system/hardware/display/display.h"
 #include "media/images.h"
 #include "system/software/functions/functions.h"
+#include "system/software/logs/logs.h"
 
 /*----------HARDWARE----------*/
 #include "system/hardware/clock/clock.h"

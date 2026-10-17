@@ -2,7 +2,8 @@
 
 // Menu Setup
 void menu_setup() {
-    print("System | Menu  | Initializing");
+    location = "Menu";
+    log("Initializing");
     battery_setup();
     clock_setup();
     // Creating Buttons

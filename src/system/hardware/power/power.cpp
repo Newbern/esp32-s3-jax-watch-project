@@ -6,11 +6,11 @@ XPowersAXP2101 PMU;
 void battery_setup()
 {
     if (!PMU.begin(Wire, AXP2101_SLAVE_ADDRESS, I2C_SDA, I2C_SCL)) {
-        print("System | Battery | Error: AXP2101 Not Found");
+        log("Error: AXP2101 Not Found");
         while(1);
     }
 
-    print("System | Battery | Initializing");
+    log("Battery", "Initializing");
 }
 
 const char* battery_run() {

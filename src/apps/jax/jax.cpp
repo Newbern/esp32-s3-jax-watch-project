@@ -5,13 +5,13 @@
 // Jax Login
 void login()
 {
-    print("System | Jax | Login: Initializing");
+    log("Login", "Initializing");
     // Getting API_KEY
     String key = get_api_key();
 
     // Checking if API_KEY exists
     if (key.isEmpty()) {
-        print("System | Jax | Storage: No API_KEY found!");
+        log("Storage", "No API_KEY found!");
         return;
     }
 
@@ -39,16 +39,16 @@ void login()
     {
         // Getting data
         String session_token = response["session"].as<String>();
-        print("System | Jax | Storage: Saved -> token");
+        log("Storage", "Saved -> token");
         save_token(session_token);
-        print("System | Jax | Login: Successful\n");
+        log("Login", "Successful\n");
     }
     // Incorrect Login data
     else
     {
-        print("System | Jax | Login: Failed");
+        log("Login", "Failed");
         String message = response["message"].as<String>();
-        merge_print("System | Jax | Message: %s\n", message.c_str());
+        log("Message", message.c_str());
     }
 
 

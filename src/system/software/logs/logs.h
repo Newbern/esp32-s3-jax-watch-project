@@ -1,6 +1,11 @@
 #ifndef LOGS_H
 #define LOGS_H
 
-void logs(const char* location, const char* app, const char* action, const char* bonus)
+#include "system/software/run/app.h"
+
+#pragma once
+extern const char* source;
+extern const char* location;
+void log(const char* action, const char* bonus = "");
 
 #endif

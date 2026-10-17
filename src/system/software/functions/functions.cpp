@@ -46,12 +46,23 @@ void merge_print(const char* text, const char* var){
     print(message);
 }
 
+const char* log_merge(const char* text, const char* var){
+    static char message[100];
+    snprintf(message, sizeof(message), text, var);
+    return message;
+}
+
 const char* str(int text)
 {
-    static std::string result;
-    result = std::to_string(text);
+    static String result;
+    result = String(text);
     return result.c_str();
 }
+
+const char* str(String text) {
+    return text.c_str();
+}
+
 
 // Button Class
 Button::Button(const char* name, int x, int y, int w, int h, int color, const uint8_t* img)

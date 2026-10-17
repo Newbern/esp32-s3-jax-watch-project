@@ -2,7 +2,7 @@
 
 void test_setup() {
     clear_print();
-    print("System | Test | Setup: Initializing");
+    log("Setup", "Initializing");
 }
 
 void test_run(TouchPoint pressed) {

@@ -30,7 +30,7 @@ void display_setup() {
       0 // row_offset2
     );
     print("------------------SYSTEM-RUNNING-----------------------\n\n\n\n-------------------------------------------------------\n");
-    print("System | Display | Initialized");
+    log("Initialized");
 }
 
 // Touch Screen Setup
@@ -65,15 +65,15 @@ void wake()
 
 // Touch Screen Setup
 void touch_setup() {
-    print(" System | Touch | Initializing");
+    log("Initializing");
     // Connecting to the touch screen using the Wire library, this is the bus that the touch screen uses to communicate with the microcontrollar
     touchReady = touch.begin(Wire);
     
     // Checking if the touch screen is ready and printing the result to the serial monitor
     if (!touchReady) {
-        print("System | Touch | Touch Ready: Failed\n");
+        log("Touch Ready", "Failed\n");
     } else {
-        print("System | Touch | Touch Ready: Success\n");
+        log("Touch Ready", "Success\n");
     }
 
     

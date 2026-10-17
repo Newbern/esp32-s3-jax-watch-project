@@ -8,7 +8,7 @@ bool jax_request(
     const String& token = ""
 ) 
     {
-        print("System | Jax | HTTP: Initializing");
+        log("HTTP", "Initializing");
         
         // Getting url
         String url = String(JAX_URL);
@@ -18,7 +18,7 @@ bool jax_request(
 
         // Checking endpoint url
         if (!http.begin(url + endpoint)) {
-            print("System | Jax | HTTP: Initialization failed!");
+            log("HTTP", "Initialization failed!");
             return false;
         }
 
@@ -44,7 +44,7 @@ bool jax_request(
 
         // Getting Response code errors
         if (responseCode != 200) {
-                merge_print("System | Jax | HTTP: Response Code -> %s", str(responseCode));
+                log("HTTP" , str(responseCode));
                 http.end();
                 return false;
             }
@@ -59,7 +59,7 @@ bool jax_request(
         http.end();
 
         if (error) {
-            print("System | Jax | HTTP: Invalid JSON response!\n");
+            log("HTTP", "Invalid JSON response!\n");
             return false;
         }
 

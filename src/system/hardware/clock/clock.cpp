@@ -73,11 +73,11 @@ void clock_reset() {
 void clock_setup() {
     if (!rtc.begin(Wire))
     {
-        print("System | Clock | Error: RTC not found!");
+        log("Clock", "Error -> RTC not found!");
         while (1);
     }
     else {
-        print("System | Clock | Initializing");
+        log("Initializing");
     }
     
 }

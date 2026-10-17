@@ -14,7 +14,9 @@ void clear_print();
 void timeout();
 void print(const char* text);
 void merge_print(const char* text, const char* var);
+const char* log_merge(const char* text, const char* var);
 const char* str(int text);
+const char* str(String text);
 
 /*----------CLASSES----------*/
 class Button {

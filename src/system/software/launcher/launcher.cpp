@@ -45,7 +45,7 @@ void launcher_setup() {
     int w = screen_w / 5;
     int h = screen_h / 2.4;
     clear_print();
-    print("System | Launcher | Creating Buttons...\n");
+    log("Creating Buttons...\n");
     L_Button = new Button("Left_Slider", x, y, w, h, YELLOW, epd_bitmap_icons8_home_50);
     R_Button = new Button("Right_Slider", x+(w*4), y, w, h, YELLOW, epd_bitmap_icons8_home_50);
     M_Button = new Button("Open_App", x + w + spacer, y, w * 3 - (spacer * 2), h, apps_list[selected_app].color, epd_bitmap_icons8_home_50);

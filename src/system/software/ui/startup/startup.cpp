@@ -2,17 +2,17 @@
 
 void startup_setup() {
     // Wire Setup
-    print("System | Startup | Initializing");
+    log("Initializing");
 
     // Running Wire
     if (Wire.begin(I2C_SDA, I2C_SCL))
     {
-        print("System | Startup | Wire: Successful\n");
+        log("Wire: Successful\n");
     }
 
     else
     {
-        print("System | Startup | Wire: Failed\n");
+        log("Wire: Failed\n");
     }
     
 
@@ -20,7 +20,7 @@ void startup_setup() {
 
     if (!gfx->begin())
     {
-        Serial.println("System | Startup | Error: gfx->begin() failed!");
+        log("Error: gfx->begin() failed!");
         while (1);
     }
     
@@ -34,6 +34,7 @@ void startup_setup() {
 // }
 
 void startup_run() {
+    location = "Wifi";
     // Getting Screen Dimensions
     int screen_w = gfx->width();
     int screen_h = gfx->height();
@@ -53,7 +54,6 @@ void startup_run() {
     clear();
 
     say("Steven Newbern", x, y, w, h, RED, 4);
-    
     if (wifi.setup()) {
     say("WiFi Connected", x, y + 50, w, h, GREEN, 4);
     }
