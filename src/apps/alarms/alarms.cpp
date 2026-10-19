@@ -1,6 +1,7 @@
 #include "apps/apps.h"
 
 String data = "";
+JsonDocument data_response;
 
 void alarms_setup() {
     alarms_get();
@@ -27,87 +28,69 @@ void alarms_get() {
 
     // Turning json document into a string
     serializeJson(request, body);
-
-    // Creating Json Response object
-    JsonDocument response;
     
     // Using Jax Http request
-    if (!jax_request("alarm/get-alarm-data", body, response, false, token)) {
+    if (!jax_request("alarm/get-alarm-data", body, data_response, false, token)) {
+        return;
+    }
+    deserializeJson(data_response, data);
+    merge_print("System | Jax | Alarm: data -> %s\n", data.c_str());
+}
+
+void alarm_layout() {
+    // Screen size
+    int screen_w = gfx->width();
+    int screen_h = gfx->height();
+
+    // Getting Alarm Sizes
+    int w = round(screen_w * 0.9 / 2) * 2;
+    int h = round(screen_h * 0.1);
+
+    int spacer = 10;
+    int x = (screen_w/2)-(w/2);
+    int y = spacer;
+
+    clear();
+    // Header
+    say("ALARMS", x, y, w, h, CYAN, 3);
+
+    // Checking response data
+    DeserializationError error = deserializeJson(data_response, data);
+
+    if (error || !data_response.is<JsonArray>()) {
+        say("Failed to load alarms", x, y, w, h, RED, 2);
+        return_to_menu();
         return;
     }
 
-    // // Request sent successfully
-    // if (response["success"].as<bool>())
-    // {
-    //     // Getting data
-    //     serializeJson(response, data);
-        
-    //     merge_print("System | Jax | Alarm: data ->%s\n", data.c_str());
-    // }
-    // // Incorrect Login data
-    // else
-    // {
-    //     print("System | Jax | Alarm: Failed");
-    //     String message = response["message"].as<String>();
-    //     merge_print("System | Jax | Message: %s\n", message.c_str());
-    // } 
+    // Getting Alarm data
+    JsonArray alarms = data_response.as<JsonArray>();
 
+    // No Alarms are found in data
+    if (alarms.size() == 0) {
+        say("No alarms were found", x, y, w, h, WHITE, 2);
+    }
 
+    // Createing Alarm Objects
+    int y = 90;
 
+    for (JsonObject alarm: alarms) {
+        String message = alarm["message"] | "Alarm";
+        String day = alarm["day"] | "Everyday";
 
-
-    serializeJson(response, data);
-    merge_print("System | Jax | Alarm: data -> %s\n", data.c_str());
-
-
-
-
-
-
-
-
-
-
-
+        // Alarm Card
+        int time = alarm["time"] | 0;
+        say (return_time(time), x, y, w, h, RED, 10)
+    }
 
 
 
 
 }
-
-// void alarms_run(TouchPoint pressed) {
-//     say(data.c_str(), 100, 100, 100, 100, BLUE, 8);
-
-//     if (pressed.pressed) {
-//         return_to_menu();
-//     }
-// }
-
 void alarms_run(TouchPoint pressed) {
-    clear();
-
-    // Header
-    say("ALARMS", 20, 15, 370, 45, CYAN, 3);
-
     // Divider
     gfx->drawFastHLine(25, 70, 360, WHITE);
 
-    // Display alarms
-    JsonDocument response;
-
-    DeserializationError error = deserializeJson(response, data);
-
-    if (error || !response.is<JsonArray>()) {
-        say("Failed to load alarms", 20, 200, 370, 50, RED, 2);
-        return_to_menu();
-        return;
-    }
-
-    JsonArray alarms = response.as<JsonArray>();
-
-    if (alarms.size() == 0) {
-        say("No alarms found", 20, 180, 370, 50, WHITE, 2);
-    }
 
     int y = 90;
 
@@ -116,14 +99,7 @@ void alarms_run(TouchPoint pressed) {
         int hours = (time / 3600) % 24;
         int minutes = (time % 3600) / 60;
 
-        char time_text[10];
-        snprintf(
-            time_text,
-            sizeof(time_text),
-            "%02d:%02d",
-            hours,
-            minutes
-        );
+        time_text = return_time();
 
         String message = alarm["message"] | "Alarm";
         String day = alarm["day"] | "Everyday";

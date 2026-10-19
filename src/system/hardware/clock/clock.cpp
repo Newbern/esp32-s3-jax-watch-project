@@ -148,3 +148,23 @@ const char* day_run() {
 
     return dayBuffer;
 }
+
+
+const char* return_time(int time) {
+    // Converting Seconds to Hours
+    hours = (time / 3600) % 24;
+    // Getting the remaining Seconds to get minutes
+    minutes = (time % 3600) / 60;
+
+    // Createing returnable value
+    char time_text[10];
+    snprintf(
+        time_text,
+        sizeof(time_text),
+        "%02d:%02d",
+        hours,
+        minutes
+    );
+
+    return time_text;
+}

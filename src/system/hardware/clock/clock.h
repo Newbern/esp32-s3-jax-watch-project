@@ -22,5 +22,6 @@ void clock_setup();
 const char* clock_run();
 const char* date_run();
 const char* day_run();
+const char* return_time(int time);
 
 #endif
