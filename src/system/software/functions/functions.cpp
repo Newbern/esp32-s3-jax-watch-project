@@ -78,7 +78,7 @@ Button::Button(const char* name, int x, int y, int w, int h, int color, const ui
     this->img_height = 50;
 
     
-    merge_print("System | Function | %s_Button", name);
+    log(log_merge("%s_Button", name));
     
 }
 
@@ -89,6 +89,17 @@ void Button::draw(const char* text, uint16_t text_color, uint8_t font_size)
     say(text, x, y, w, h, WHITE, font_size);
     
 
+}
+
+void Button::toggle_draw(uint16_t text_color, uint8_t font_size)
+{
+    int toggle_height = h / 2;
+    int tx = x + toggle_height;
+    int ty = y + toggle_height;
+    int tw = w + toggle_height;
+    int th = h + toggle_height;
+    gfx->fillRoundRect(x, y, w, h, toggle_height, text_color);
+    gfx->fillCircle(tx, ty, toggle_height - 3, text_color);
 }
 
 // Button Logic for when the Button area is pressed with TouchPoint parameter
@@ -157,4 +168,8 @@ bool Button::swipe(TouchPoint touch, int a, int b, bool x_axis) {
 
 
 
+}
+
+void draw_rect(int x, int y, int w, int h, uint16_t color) {
+    gfx->drawRect(x, y, w, h, color);
 }

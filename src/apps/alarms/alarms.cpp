@@ -42,13 +42,14 @@ void alarm_layout() {
     int screen_w = gfx->width();
     int screen_h = gfx->height();
 
-    // Getting Alarm Sizes
+    // Getting Alarm card div size
     int w = round(screen_w * 0.9 / 2) * 2;
-    int h = round(screen_h * 0.1);
+    int h = round(screen_h * 0.1 / 2) * 2;
 
     int spacer = 10;
     int x = (screen_w/2)-(w/2);
     int y = spacer;
+    int new_y = spacer + h;
 
     clear();
     // Header
@@ -72,15 +73,22 @@ void alarm_layout() {
     }
 
     // Createing Alarm Objects
-    int y = 90;
-
     for (JsonObject alarm: alarms) {
-        String message = alarm["message"] | "Alarm";
-        String day = alarm["day"] | "Everyday";
+        // Setting Y Coordinates
+        y += new_y;
 
-        // Alarm Card
+        // Getting Alarm data
         int time = alarm["time"] | 0;
-        say (return_time(time), x, y, w, h, RED, 10)
+        const char* message = String(alarm["message"] | "No Name").c_str();
+        const char* days = String(alarm["day"] | "None").c_str();
+
+        // Div
+        draw_rect(x, y, w, h, DARKGREY);
+        int gap = x * 0.1;
+        int dh = h/3;
+        say (message, x+gap, y+gap, w, h, RED, 2);
+        say (return_time(time), x+gap, y+gap+dh, w, h, RED, 2);
+        say (days, x+gap, y+gap+dh+gap, w, h, RED, 2);
     }
 
 
@@ -88,44 +96,48 @@ void alarm_layout() {
 
 }
 void alarms_run(TouchPoint pressed) {
-    // Divider
-    gfx->drawFastHLine(25, 70, 360, WHITE);
-
-
-    int y = 90;
-
-    for (JsonObject alarm : alarms) {
-        int time = alarm["time"] | 0;
-        int hours = (time / 3600) % 24;
-        int minutes = (time % 3600) / 60;
-
-        time_text = return_time();
-
-        String message = alarm["message"] | "Alarm";
-        String day = alarm["day"] | "Everyday";
-
-        // Alarm card
-        gfx->fillRoundRect(20, y, 370, 100, 12, DARKGREY);
-        gfx->drawRoundRect(20, y, 370, 100, 12, CYAN);
-
-        say(time_text, 30, y + 8, 140, 40, WHITE, 3);
-        say(day.c_str(), 180, y + 8, 195, 30, CYAN, 2);
-        say(message.c_str(), 30, y + 52, 350, 35, WHITE, 2);
-
-        y += 115;
-
-        if (y > 380) {
-            break;
-        }
-    }
-
-    // Back button
-    gfx->fillRoundRect(100, 435, 210, 50, 12, BLUE);
-    say("BACK", 100, 435, 210, 50, WHITE, 2);
-
-    if (pressed.pressed &&
-        pressed.x >= 100 && pressed.x <= 310 &&
-        pressed.y >= 435 && pressed.y <= 485) {
-        return_to_menu();
-    }
+    alarm_layout();
 }
+
+// void alarms_run(TouchPoint pressed) {
+//     // Divider
+//     gfx->drawFastHLine(25, 70, 360, WHITE);
+
+
+//     int y = 90;
+
+//     for (JsonObject alarm : alarms) {
+//         int time = alarm["time"] | 0;
+//         int hours = (time / 3600) % 24;
+//         int minutes = (time % 3600) / 60;
+
+//         time_text = return_time();
+
+//         String message = alarm["message"] | "Alarm";
+//         String day = alarm["day"] | "Everyday";
+
+//         // Alarm card
+//         gfx->fillRoundRect(20, y, 370, 100, 12, DARKGREY);
+//         gfx->drawRoundRect(20, y, 370, 100, 12, CYAN);
+
+//         say(time_text, 30, y + 8, 140, 40, WHITE, 3);
+//         say(day.c_str(), 180, y + 8, 195, 30, CYAN, 2);
+//         say(message.c_str(), 30, y + 52, 350, 35, WHITE, 2);
+
+//         y += 115;
+
+//         if (y > 380) {
+//             break;
+//         }
+//     }
+
+//     // Back button
+//     gfx->fillRoundRect(100, 435, 210, 50, 12, BLUE);
+//     say("BACK", 100, 435, 210, 50, WHITE, 2);
+
+//     if (pressed.pressed &&
+//         pressed.x >= 100 && pressed.x <= 310 &&
+//         pressed.y >= 435 && pressed.y <= 485) {
+//         return_to_menu();
+//     }
+// }

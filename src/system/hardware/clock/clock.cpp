@@ -152,9 +152,9 @@ const char* day_run() {
 
 const char* return_time(int time) {
     // Converting Seconds to Hours
-    hours = (time / 3600) % 24;
+    int hours = (time / 3600) % 24;
     // Getting the remaining Seconds to get minutes
-    minutes = (time % 3600) / 60;
+    int minutes = (time % 3600) / 60;
 
     // Createing returnable value
     char time_text[10];

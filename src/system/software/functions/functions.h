@@ -17,6 +17,7 @@ void merge_print(const char* text, const char* var);
 const char* log_merge(const char* text, const char* var);
 const char* str(int text);
 const char* str(String text);
+void draw_rect(int x, int y, int w, int h, uint16_t color);
 
 /*----------CLASSES----------*/
 class Button {
@@ -34,10 +35,13 @@ public:
     Button(const char* name, int x, int y, int w, int h, int color, const uint8_t* img);
 
     void draw(const char* text, uint16_t text_color, uint8_t font_size);
+    void toggle_draw(uint16_t text_color, uint8_t font_size);
     void hit(TouchPoint touch, void (*function)(TouchPoint));
     void hit(TouchPoint touch, int app_id);
     void run(TouchPoint touch, void (*function)());
     bool swipe(TouchPoint touch, int a, int b, bool x_asis);
 };
+
+
 
 #endif
