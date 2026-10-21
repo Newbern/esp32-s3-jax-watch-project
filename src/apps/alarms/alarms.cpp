@@ -4,18 +4,19 @@ String data = "";
 JsonDocument data_response;
 
 void alarms_setup() {
+    location = "Jax";
     alarms_get();
 }
 
 void alarms_get() {
-    print("System | Jax | Alarm: Initializing");
+    log("Alarm" , "Initializing");
 
     // Getting Token
     String token = get_token();
 
     // Checking if Session Token Exists
     if (token.isEmpty()) {
-        print("System | Jax | Storage: No Session_Token found!");
+        log("Storage", "No Session_Token found!");
         return;
     }
 
@@ -33,8 +34,20 @@ void alarms_get() {
     if (!jax_request("alarm/get-alarm-data", body, data_response, false, token)) {
         return;
     }
-    deserializeJson(data_response, data);
-    merge_print("System | Jax | Alarm: data -> %s\n", data.c_str());
+    
+    // Turning JsonDocument into String
+    serializeJson(data_response, data);
+
+    // Checking response data
+    if (data_response.is<JsonArray>()) {
+        log("Alarm", log_merge("data -> %s\n", data.c_str()));
+    }
+    
+    else {
+        log("Alarm", "Failed to load alarms");
+        return_to_menu();
+        return;
+    }
 }
 
 void alarm_layout() {
@@ -46,30 +59,21 @@ void alarm_layout() {
     int w = round(screen_w * 0.9 / 2) * 2;
     int h = round(screen_h * 0.1 / 2) * 2;
 
+    // Coordinates
     int spacer = 10;
     int x = (screen_w/2)-(w/2);
     int y = spacer;
     int new_y = spacer + h;
 
-    clear();
     // Header
     say("ALARMS", x, y, w, h, CYAN, 3);
-
-    // Checking response data
-    DeserializationError error = deserializeJson(data_response, data);
-
-    if (error || !data_response.is<JsonArray>()) {
-        say("Failed to load alarms", x, y, w, h, RED, 2);
-        return_to_menu();
-        return;
-    }
 
     // Getting Alarm data
     JsonArray alarms = data_response.as<JsonArray>();
 
     // No Alarms are found in data
     if (alarms.size() == 0) {
-        say("No alarms were found", x, y, w, h, WHITE, 2);
+        say("No alarms were found", x, new_y, w, h, WHITE, 2);
     }
 
     // Createing Alarm Objects
