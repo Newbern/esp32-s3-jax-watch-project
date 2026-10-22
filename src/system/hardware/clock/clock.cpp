@@ -157,7 +157,7 @@ const char* return_time(int time) {
     int minutes = (time % 3600) / 60;
 
     // Createing returnable value
-    char time_text[10];
+    static char time_text[10];
     snprintf(
         time_text,
         sizeof(time_text),

@@ -171,5 +171,5 @@ bool Button::swipe(TouchPoint touch, int a, int b, bool x_axis) {
 }
 
 void draw_rect(int x, int y, int w, int h, uint16_t color) {
-    gfx->drawRect(x, y, w, h, color);
+    gfx->fillRect(x, y, w, h, color);
 }

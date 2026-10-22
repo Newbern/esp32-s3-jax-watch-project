@@ -41,6 +41,7 @@ void alarms_get() {
     // Checking response data
     if (data_response.is<JsonArray>()) {
         log("Alarm", log_merge("data -> %s\n", data.c_str()));
+        return;
     }
     
     else {
@@ -57,16 +58,24 @@ void alarm_layout() {
 
     // Getting Alarm card div size
     int w = round(screen_w * 0.9 / 2) * 2;
-    int h = round(screen_h * 0.1 / 2) * 2;
+    int h = round(screen_h * .25 / 2) * 2;
 
     // Coordinates
     int spacer = 10;
-    int x = (screen_w/2)-(w/2);
+    int x = spacer;
     int y = spacer;
     int new_y = spacer + h;
 
     // Header
-    say("ALARMS", x, y, w, h, CYAN, 3);
+    say(
+        "ALARMS", 
+        x, 
+        y, 
+        w, 
+        round(screen_h * 0.1 / 2) * 2, 
+        CYAN, 
+        3
+    );
 
     // Getting Alarm data
     JsonArray alarms = data_response.as<JsonArray>();
@@ -77,22 +86,29 @@ void alarm_layout() {
     }
 
     // Createing Alarm Objects
+    y += round(screen_h * 0.1 / 2) *2;
     for (JsonObject alarm: alarms) {
-        // Setting Y Coordinates
-        y += new_y;
 
         // Getting Alarm data
         int time = alarm["time"] | 0;
-        const char* message = String(alarm["message"] | "No Name").c_str();
-        const char* days = String(alarm["day"] | "None").c_str();
+        
+        log("Alarm", String("Raw TIme: ") + String(time));
+        log("Alarm", return_time(time));
+        String message = String(alarm["message"] | "No Name");
+        String days = String(alarm["day"] | "None");
 
         // Div
-        draw_rect(x, y, w, h, DARKGREY);
-        int gap = x * 0.1;
-        int dh = h/3;
-        say (message, x+gap, y+gap, w, h, RED, 2);
-        say (return_time(time), x+gap, y+gap+dh, w, h, RED, 2);
-        say (days, x+gap, y+gap+dh+gap, w, h, RED, 2);
+        draw_rect(x, y, w, h, BLUE);
+        int gap = 10;
+        int dx = x + gap;
+        int dy = y + gap;
+        int dh = (h / 3) - (gap);
+        say (str(message), dx, dy, w, dh, WHITE, 4);
+        say (return_time(time), dx, dy+dh, w, dh, WHITE, 4);
+        say (str(days), dx, dy+dh+gap+dh, w, dh, WHITE, 4);
+
+        // Setting Y Coordinates
+        y += new_y;
     }
 
 

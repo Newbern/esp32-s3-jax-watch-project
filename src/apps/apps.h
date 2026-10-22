@@ -9,6 +9,7 @@
 // Alarms
 void alarms_setup();
 void alarms_get();
+void alarm_layout();
 void alarms_run(TouchPoint pressed);
 
 // Clock
