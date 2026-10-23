@@ -58,7 +58,7 @@ void alarm_layout() {
 
     // Getting Alarm card div size
     int w = round(screen_w * 0.9 / 2) * 2;
-    int h = round(screen_h * .25 / 2) * 2;
+    int h = round(screen_h * .5 / 2) * 2;
 
     // Coordinates
     int spacer = 10;
@@ -67,13 +67,14 @@ void alarm_layout() {
     int new_y = spacer + h;
 
     // Header
+    draw_rect(x, y, w, round(screen_h * 0.1 / 2) * 2, BLUE);
     say(
         "ALARMS", 
         x, 
         y, 
         w, 
         round(screen_h * 0.1 / 2) * 2, 
-        CYAN, 
+        WHITE, 
         3
     );
 
@@ -90,10 +91,7 @@ void alarm_layout() {
     for (JsonObject alarm: alarms) {
 
         // Getting Alarm data
-        int time = alarm["time"] | 0;
-        
-        log("Alarm", String("Raw TIme: ") + String(time));
-        log("Alarm", return_time(time));
+        int time = alarm["time"].as<int>() | 0;
         String message = String(alarm["message"] | "No Name");
         String days = String(alarm["day"] | "None");
 
@@ -102,10 +100,12 @@ void alarm_layout() {
         int gap = 10;
         int dx = x + gap;
         int dy = y + gap;
-        int dh = (h / 3) - (gap);
-        say (str(message), dx, dy, w, dh, WHITE, 4);
-        say (return_time(time), dx, dy+dh, w, dh, WHITE, 4);
-        say (str(days), dx, dy+dh+gap+dh, w, dh, WHITE, 4);
+        int dw = w - gap*2;
+        int dh = (h / 3) - gap*2;
+        say (str(message), dx, dy, dw, dh, WHITE, 4, "left");
+        say (return_time(time), dx, dy+dh+gap, dw/2, dh, WHITE, 4, "left");
+        say ("(_O)", dx+dw/2+gap, dy+dh+gap, dw/2, dh, WHITE, 4, "right");
+        say (str(days), dx, dy+dh+gap+dh+gap, dw, dh, WHITE, 4, "left");
 
         // Setting Y Coordinates
         y += new_y;

@@ -1,20 +1,40 @@
 #include "functions.h"
 
 // Prints Words on Screen
-void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t size) {
+void say(const char* text, int x, int y, int w, int h, uint16_t color, uint8_t size, const char* justify) {
 
+    // TESTING ONLY
+    //gfx->fillRect(x, y, w, h, RED);
+
+    // Setting Text to Size
     gfx->setTextSize(size);
+    // Setting Text color
     gfx->setTextColor(color);
 
+    // Creating Variables for TextBounds
     int16_t x1, y1;
     uint16_t text_w, text_h;
 
+    // Getting Text Variables
     gfx->getTextBounds(text, 0, 0, &x1, &y1, &text_w, &text_h);
+    int text_x;
+    int text_y = y + (h - text_h) / 2 - y1;;
 
-    int text_x = x + (w - text_w) / 2;
-    int text_y = y + (h - text_h) / 2 - y1;
+    // Justifying Text
+    if (justify == "center") {
+        text_x = x + (w - text_w) / 2;
+    }
+    else if (justify == "left") {
+        text_x = x;
+    }
+    else if (justify = "right") {
+        text_x = x + w - text_w;
+    }
 
+    // Setting Coordinates
     gfx->setCursor(text_x, text_y);
+
+    // Displaying Text
     gfx->print(text);
 }
 
