@@ -193,3 +193,52 @@ bool Button::swipe(TouchPoint touch, int a, int b, bool x_axis) {
 void draw_rect(int x, int y, int w, int h, uint16_t color) {
     gfx->fillRect(x, y, w, h, color);
 }
+
+
+// Scroll
+void Scroll::setup(int content_height, int screen_height) {
+    max_position = content_height - screen_height;
+
+    if (max_position < 0 ) {
+        max_position = 0;
+    }
+
+    position = 0;
+}
+
+void Scroll::update(int new_position) {
+    position += new_position;
+
+    if (position < 0 ) {
+        position = 0;
+    }
+
+    if (position > max_position) {
+        position = max_position;
+    }
+}
+
+void Scroll::reset() {
+    position = 0;
+}
+
+int Scroll::get_position() {
+    return position;
+}
+
+void Scroll::draw() {
+    int screen_w = gfx->width();
+    int screen_h = gfx->height();
+
+    int x = screen_w - 10;
+    int y = 10;
+
+    // Map scroll position to screen position
+    int indicator_y = y;
+
+    if (max_position > 0) {
+        indicator_y += (position * (screen_h - 20)) / max_position;
+    }
+
+    gfx->drawCircle(x, indicator_y, 5, RED);
+}

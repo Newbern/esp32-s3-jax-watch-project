@@ -15,9 +15,6 @@ void startup_setup() {
         log("Wire: Failed\n");
     }
     
-
-    
-
     if (!gfx->begin())
     {
         log("Error: gfx->begin() failed!");

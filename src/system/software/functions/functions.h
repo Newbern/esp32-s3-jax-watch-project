@@ -42,6 +42,18 @@ public:
     bool swipe(TouchPoint touch, int a, int b, bool x_asis);
 };
 
+class Scroll {
+private:
+    int position = 0;
+    int max_position = 0;
+public:
+    void setup(int content_height, int screen_height);
+    void update(int new_position);
+    void reset();
+    int get_position();
+    void draw();
 
+
+};
 
 #endif

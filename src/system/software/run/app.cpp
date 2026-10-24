@@ -16,6 +16,8 @@ void app_setup(){
     touch_setup();
 
     // System startup 
+    location = "Storage";
+    jax_storage_setup();
     startup_run();
 
     // Software setup

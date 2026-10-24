@@ -39,7 +39,9 @@ void login()
     {
         // Getting data
         String session_token = response["session"].as<String>();
-        log("Storage", "Saved -> token");
+
+        // Saving session_token to storage
+        log("Storage", log_merge("Saved -> %s", str(session_token)));
         save_token(session_token);
         log("Login", "Successful\n");
     }
@@ -55,7 +57,6 @@ void login()
 }
 
 void jax_setup() {
-    jax_storage_setup();
     login();
 };
 

@@ -27,6 +27,9 @@
 void app_setup();
 void app_run();
 
+// Storage
+void jax_storage_setup();
+
 // Startup
 void startup_setup();
 void startup_run();
