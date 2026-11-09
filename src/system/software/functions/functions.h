@@ -47,7 +47,10 @@ private:
     int position = 0;
     int max_position = 0;
 public:
-    void setup(int content_height, int screen_height);
+    // Getting Screen Dimensions
+    int screen_width = gfx->width();
+    int screen_height = gfx->height();
+    void setup(int content_height);
     void update(int new_position);
     void reset();
     int get_position();

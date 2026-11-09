@@ -196,49 +196,59 @@ void draw_rect(int x, int y, int w, int h, uint16_t color) {
 
 
 // Scroll
-void Scroll::setup(int content_height, int screen_height) {
+void Scroll::setup(int content_height) {
+    // Setting max_position based on content height and screen height
     max_position = content_height - screen_height;
 
+    // Ensuring max_position is not negative
     if (max_position < 0 ) {
         max_position = 0;
     }
 
+    // Resetting position to 0
     position = 0;
 }
 
 void Scroll::update(int new_position) {
+    // Updating position based on new_position
     position += new_position;
 
+    // Ensuring position is within bounds
     if (position < 0 ) {
         position = 0;
     }
 
+    // Ensuring position does not exceed max_position
     if (position > max_position) {
         position = max_position;
     }
 }
 
 void Scroll::reset() {
+    // Resetting position to 0
     position = 0;
 }
 
 int Scroll::get_position() {
+    // Returning the current position
     return position;
 }
 
 void Scroll::draw() {
-    int screen_w = gfx->width();
-    int screen_h = gfx->height();
-
-    int x = screen_w - 10;
+    // Scrollbar Position
+    int x = screen_width - 10;
     int y = 10;
 
-    // Map scroll position to screen position
+    // Scrollbar Size
+    int scroll_area = screen_height - 20;
     int indicator_y = y;
 
+    // Drawing Scroll Bar when max_position is greater than 0
     if (max_position > 0) {
-        indicator_y += (position * (screen_h - 20)) / max_position;
+        indicator_y += (position * scroll_area) / max_position;
     }
 
+    // Drawing Scroll Bar
+    gfx->fillRect(x, y, 5, scroll_area, WHITE);
     gfx->drawCircle(x, indicator_y, 5, RED);
 }

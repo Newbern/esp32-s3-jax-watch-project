@@ -116,7 +116,7 @@ void alarm_layout() {
     }
 
     // Setting Alarm Scroll
-    alarm_scroll.setup(content_h*5, screen_h);
+    alarm_scroll.setup(content_h*5);
 
 
 
@@ -125,9 +125,13 @@ void alarm_layout() {
 
 void alarms_run(TouchPoint pressed) {
     clear();
+    // Createing Alarms
     alarm_layout();
     log("Alarm", log_merge("Touch pressed -> %s", str(pressed.y)));
+
+    // Getting Alarm Scroll position
     alarm_scroll.update(pressed.y);
+    // Drawing Alarm Scroll
     alarm_scroll.draw(); 
     log("Alarm", log_merge("Scroll Position -> %s", str(alarm_scroll.get_position())));
 }
