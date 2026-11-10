@@ -197,6 +197,10 @@ void draw_rect(int x, int y, int w, int h, uint16_t color) {
 
 // Scroll
 void Scroll::setup(int content_height) {
+    // Getting Screen Dimensions
+    screen_width = gfx->width();
+    screen_height = gfx->height();
+
     // Setting max_position based on content height and screen height
     max_position = content_height - screen_height;
 
