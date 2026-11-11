@@ -6,8 +6,15 @@ JsonDocument data_response;
 Scroll alarm_scroll;
 
 void alarms_setup() {
+    // Getting Alarm Data from Jax API
     location = "Jax";
     alarms_get();
+
+    // Content Height for Alarm Layout
+    int content_height = alarm_repeat();
+
+    // Setting up Alarm Scroll
+    alarm_scroll.setup(content_height);
 }
 
 void alarms_get() {
@@ -53,7 +60,7 @@ void alarms_get() {
     }
 }
 
-void alarm_layout() {
+int alarm_layout(int scroll_position) {
     // Screen size
     int screen_w = gfx->width();
     int screen_h = gfx->height();
@@ -65,7 +72,7 @@ void alarm_layout() {
     // Coordinates
     int spacer = 10;
     int x = spacer;
-    int y = spacer - alarm_scroll.get_position();
+    int y = spacer - scroll_position;
     int new_y = spacer + h;
     
     // Header
@@ -88,9 +95,12 @@ void alarm_layout() {
         say("No alarms were found", x, new_y, w, h, WHITE, 2);
     }
 
-    // Createing Alarm Objects
+    
+    // Setting First Y Coordinate
     y += round(screen_h * 0.1 / 2) *2;
-    int content_h;
+    int content_h = y + h + spacer;
+
+    // Createing Alarm Objects
     for (JsonObject alarm: alarms) {
 
         // Getting Alarm data
@@ -99,38 +109,55 @@ void alarm_layout() {
         String days = String(alarm["day"] | "None");
 
         // Div
-        draw_rect(x, y, w, h, BLUE);
         int gap = 10;
         int dx = x + gap;
         int dy = y + gap;
         int dw = w - gap*2;
         int dh = (h / 3) - gap*2;
-        content_h = (dy+dh+gap+dh+gap+dh+gap);
-        say (str(message), dx, dy, dw, dh, WHITE, 4, "left");
-        say (return_time(time), dx, dy+dh+gap, dw/2, dh, WHITE, 4, "left");
-        say ("(_O)", dx+dw/2+gap, dy+dh+gap, dw/2, dh, WHITE, 4, "right");
-        say (str(days), dx, dy+dh+gap+dh+gap, dw, dh, WHITE, 4, "left");
+        content_h += content_h;
 
-        // Setting Y Coordinates
+        // Drawing Alarm Card Background
+        draw_rect(x, y, w, h, BLUE);
+        // Drawing Alarm Card Content
+        // Drawing Message
+        say(str(message), dx, dy, dw, dh, WHITE, 4, "left");
+        // Drawing Time
+        say(return_time(time), dx, dy+dh+gap, dw/2, dh, WHITE, 4, "left");
+        // Drawing Toggle Icon
+        say("(_O)", dx+dw/2+gap, dy+dh+gap, dw/2, dh, WHITE, 4, "right");
+        // Drawing Days
+        say(str(days), dx, dy+dh+gap+dh+gap, dw, dh, WHITE, 4, "left");
+
+        // Setting Next Y Coordinate
         y += new_y;
     }
 
-    // Setting Alarm Scroll
-    alarm_scroll.setup(content_h*5);
+    // Returning Content Height
+    return content_h;
+}
 
+int alarm_repeat() {
+    // Clearing Screen
+    clear();
 
+    // Getting Alarm Scroll position
+    int scroll_position = alarm_scroll.get_position();
 
+    // Createing Alarm Layout
+    int content_height = alarm_layout(scroll_position);
 
+    return content_height;
 }
 
 void alarms_run(TouchPoint pressed) {
-    clear();
-    // Createing Alarms
-    alarm_layout();
+    // Createing Alarm Layout
+    alarm_repeat();
+
     log("Alarm", log_merge("Touch pressed -> %s", str(pressed.y)));
 
-    // Getting Alarm Scroll position
+    // Updating Alarm Scroll position
     alarm_scroll.update(pressed.y);
+
     // Drawing Alarm Scroll
     alarm_scroll.draw(); 
     log("Alarm", log_merge("Scroll Position -> %s", str(alarm_scroll.get_position())));

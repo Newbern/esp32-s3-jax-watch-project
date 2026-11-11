@@ -240,8 +240,10 @@ int Scroll::get_position() {
 
 void Scroll::draw() {
     // Scrollbar Position
-    int x = screen_width - 10;
+    int w = 10;
+    int x = screen_width - w - 5;
     int y = 10;
+    
 
     // Scrollbar Size
     int scroll_area = screen_height - 20;
@@ -249,10 +251,10 @@ void Scroll::draw() {
 
     // Drawing Scroll Bar when max_position is greater than 0
     if (max_position > 0) {
-        indicator_y += (position * scroll_area) / max_position;
+        indicator_y += (position * (scroll_area - w * 2)) / max_position;
     }
 
     // Drawing Scroll Bar
-    gfx->fillRect(x, y, 5, scroll_area, WHITE);
-    gfx->drawCircle(x, indicator_y, 5, RED);
+    gfx->fillRect(x, y, w, scroll_area, WHITE);
+    gfx->drawCircle(x, indicator_y, w, RED);
 }
