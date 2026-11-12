@@ -46,6 +46,7 @@ class Scroll {
 private:
     int position = 0;
     int max_position = 0;
+    int touch_position = 0;
 public:
     // Getting Screen Dimensions
     int screen_width = 0;

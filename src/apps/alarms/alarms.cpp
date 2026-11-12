@@ -98,7 +98,7 @@ int alarm_layout(int scroll_position) {
     
     // Setting First Y Coordinate
     y += round(screen_h * 0.1 / 2) *2;
-    int content_h = y + h + spacer;
+    int content_h = h + spacer;
 
     // Createing Alarm Objects
     for (JsonObject alarm: alarms) {
@@ -132,6 +132,7 @@ int alarm_layout(int scroll_position) {
         y += new_y;
     }
 
+    
     // Returning Content Height
     return content_h;
 }
@@ -151,7 +152,7 @@ int alarm_repeat() {
 
 void alarms_run(TouchPoint pressed) {
     // Createing Alarm Layout
-    alarm_repeat();
+    int height = alarm_repeat();
 
     log("Alarm", log_merge("Touch pressed -> %s", str(pressed.y)));
 
