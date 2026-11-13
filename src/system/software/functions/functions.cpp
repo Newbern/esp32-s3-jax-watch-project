@@ -215,13 +215,14 @@ void Scroll::setup(int content_height) {
 
 void Scroll::update(int new_position) {
     // Checking if new_position is UP or DOWN
-    if (new_position > position) {
-        position += new_position;
-    }
-    else if (new_position < position) {
-        position -= new_position;
-    }
-    
+    // if (new_position > position) {
+    //     position += new_position;
+    // }
+    // else if (new_position < position) {
+    //     position -= new_position;
+    // }
+    position = new_position;
+
 
     // Ensuring position is within bounds
     if (position < 0 ) {
@@ -265,39 +266,6 @@ void Scroll::draw() {
     gfx->drawCircle(x, indicator_y, w, RED);
 }
 
-
-// // Custom Scrollbar Drawing Function
-// void Classic_Scroll::setup(int content_height) {
-//     // Getting Screen Dimensions
-//     screen_width = gfx->width();
-//     screen_height = gfx->height();
-
-//     // Setting max_position based on content height and screen height
-//     max_position = content_height - screen_height;
-
-//     // Ensuring max_position is not negative
-//     if (max_position < 0 ) {
-//         max_position = 0;
-//     }
-
-//     // Resetting position to 0
-//     position = 0;
-// }
-
-// void Classic_Scroll::update(int new_position) {
-//     // Updating position based on new_position
-//     position += new_position;
-
-//     // Ensuring position is within bounds
-//     if (position < 0 ) {
-//         position = 0;
-//     }
-
-//     // Ensuring position does not exceed max_position
-//     if (position > max_position) {
-//         position = max_position;
-//     }
-// }
 
 
 

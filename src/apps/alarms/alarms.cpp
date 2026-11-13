@@ -154,12 +154,15 @@ void alarms_run(TouchPoint pressed) {
     // Createing Alarm Layout
     int height = alarm_repeat();
 
-    log("Alarm", log_merge("Touch pressed -> %s", str(pressed.y)));
+    
 
     // Updating Alarm Scroll position
     alarm_scroll.update(pressed.y);
 
     // Drawing Alarm Scroll
     alarm_scroll.draw(); 
+    log("Alarm", log_merge("Screen Height -> %s", str(gfx->height())));
+    log("Alarm", log_merge("Content Height -> %s", str(height)));
+    log("Alarm", log_merge("Touch pressed -> %s", str(pressed.y)));
     log("Alarm", log_merge("Scroll Position -> %s", str(alarm_scroll.get_position())));
 }
