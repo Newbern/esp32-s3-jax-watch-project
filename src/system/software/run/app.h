@@ -4,9 +4,11 @@
 
 /*----------HELPERS----------*/
 #include "system/hardware/display/display.h"
+#include "system/hardware/touch/touch.h"
 #include "media/images.h"
 #include "system/software/functions/functions.h"
 #include "system/software/logs/logs.h"
+#include "system/hardware/settings/settings.h"
 
 /*----------HARDWARE----------*/
 #include "system/hardware/clock/clock.h"
@@ -22,6 +24,7 @@
 /*----------FUNCTIONS----------*/
 // Settings
 //void settings_setup();
+void hardware_settings_setup();
 
 // App setup
 void app_setup();

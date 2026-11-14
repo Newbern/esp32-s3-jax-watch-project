@@ -1,25 +1,6 @@
 #include "startup.h"
 
 void startup_setup() {
-    // Wire Setup
-    log("Initializing");
-
-    // Running Wire
-    if (Wire.begin(I2C_SDA, I2C_SCL))
-    {
-        log("Wire: Successful\n");
-    }
-
-    else
-    {
-        log("Wire: Failed\n");
-    }
-    
-    if (!gfx->begin())
-    {
-        log("Error: gfx->begin() failed!");
-        while (1);
-    }
     
 }
 

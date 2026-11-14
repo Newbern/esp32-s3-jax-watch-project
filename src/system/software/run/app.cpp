@@ -2,18 +2,11 @@
 
 
 void app_setup(){
-    // Serial Setup
-    Serial.begin(115200);
-    delay(500);
-
     // Hardware setup
     source = "System";
-    location = "Display";
-    display_setup();
-    location = "Startup";
-    startup_setup(); // Contains Wire.begin() for I2C communication & other startup hardware setups
-    location = "Touch";
-    touch_setup();
+    hardware_settings_setup();
+
+    startup_setup();
 
     // System startup 
     location = "Storage";
