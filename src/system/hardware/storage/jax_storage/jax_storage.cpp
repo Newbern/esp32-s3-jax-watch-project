@@ -11,7 +11,7 @@ void jax_storage_setup() {
 }
 
 
-// Api Key
+/*-----------API KEY----------*/
 // UPDATE
 void save_api_key(const String& api_key) {
     // Creating Storage String for api key & Saving
@@ -29,7 +29,7 @@ void delete_api_key() {
     preferences.remove("api_key");
 }
 
-// Session_Token
+/*----------SESSION TOKEN---------*/
 // UPDATE
 void save_token(const String& token) {
     // Creating Storage String for session_token & Saving

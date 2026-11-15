@@ -3,8 +3,10 @@
 
 
 /*---------LIBS----------*/
+// Touch Functions
 #include <SensorLib.h>
 #include "TouchDrvFT6X36.hpp"
+
 
 /*----------STRUCTS----------*/
 struct TouchPoint

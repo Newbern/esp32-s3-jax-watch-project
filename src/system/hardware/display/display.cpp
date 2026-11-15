@@ -1,6 +1,7 @@
 #include "display.h"
+// System Functions
 #include "system/software/run/app.h"
-#include "system/software/functions/functions.h"
+
 
 /*----------SETUP----------*/
 Arduino_DataBus *bus = nullptr;
@@ -33,7 +34,7 @@ void display_setup() {
     );
     print("------------------SYSTEM-RUNNING-----------------------\n\n\n\n-------------------------------------------------------\n");
     log("Initialized");
-    
+
     // Checking if display is running 
     if (!gfx->begin())
     {
@@ -41,8 +42,6 @@ void display_setup() {
         while (1);
     }
 }
-
-
 
 // Display Sleep Function
 void sleep() 

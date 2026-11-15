@@ -6,7 +6,7 @@ void app_setup(){
     source = "System";
     hardware_settings_setup();
 
-    startup_setup();
+    //startup_setup();
 
     // System startup 
     location = "Storage";

@@ -1,6 +1,6 @@
 #include "touch.h"
+// System Functions
 #include "system/software/run/app.h"
-#include "system/software/functions/functions.h"
 
 // Touch Screen Setup
 TouchDrvFT6X36 touch;

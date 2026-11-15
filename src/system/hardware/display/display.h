@@ -2,13 +2,10 @@
 #define DISPLAY_H
 
 /*----------LIBS----------*/
+// Display Functions
 #include <Arduino.h>
 #include "Arduino_GFX_Library.h"
 #include "pin_config.h"
-
-
-
-
 
 /*----------GLOBAL----------*/
 extern Arduino_DataBus *bus;
