@@ -90,30 +90,33 @@ void layout() {
     int h = (screen_h - margin * 2 + spacer *4) / 4;
 
     // Heading
-    say ("JAX SERVER", x, y, w, h, PURPLE, 8);
+    say ("JAX", x, y, w, h, PURPLE, 8);
+    
+    h = (screen_h - margin * 2 + spacer *4) / 8;
+
     // Last Login
-    say ("Last Login: 2024-06-05 12:00:00", x, y+h+spacer, w, h, WHITE, 4);
+    say ("Last Login: 11/1/2026", x, y+h*2+spacer, w, h, WHITE, 2);
     // Server Status
-    say("Server Status:", x, y+h*2+spacer, w/2, h, WHITE, 4);
-    say("Online", x/2, y+h*2+spacer, w/2, h, GREEN, 4);
+    say("Server Status:", x, y+h*3+spacer, w/2, h, WHITE, 2);
+    say("Online", x/2+w/2, y+h*3+spacer, w/2, h, GREEN, 2);
     // PC Status
-    say("PC Status:", x, y+h*3+spacer*2, w/2, h, WHITE, 4);
-    say("Offline:", x/2, y+h*3+spacer*2, w/2, h, RED, 4);
+    say("PC Status:", x, y+h*4+spacer*2, w/2, h, WHITE, 2);
+    say("Offline", x/2+w/2, y+h*4+spacer*2, w/2, h, RED, 2);
 
     // Jax Login Button
-    resetButton = new Button("Reset", x/3, y+h*4+spacer*3, w/3, h, BLUE, epd_bitmap_icons8_home_50);
+    resetButton = new Button("Reset", x/3, y+h*5+spacer*3, w/3, h, BLUE, epd_bitmap_icons8_home_50);
     // Roku Button
-    rokuButton = new Button("Roku", x/3+w/3, y+h*5+spacer*4, w/3, h, PURPLE, epd_bitmap_icons8_home_50);
+    rokuButton = new Button("Roku", x/3+w/3, y+h*5+spacer*3, w/3, h, PURPLE, epd_bitmap_icons8_home_50);
     // PC Button
-    pcButton = new Button("PC", x/3+w/3*2, y+h*6+spacer*5, w/3, h, GREEN, epd_bitmap_icons8_home_50);
+    pcButton = new Button("PC", x/3+w/3*2, y+h*5+spacer*3, w/3, h, GREEN, epd_bitmap_icons8_home_50);
 }
 
 /*----------JAX RUN----------*/
 void jax_run(TouchPoint pressed) {
     layout();
-    resetButton->draw("Reset", WHITE, 4);
-    rokuButton->draw("Roku", WHITE, 4);
-    pcButton->draw("PC", WHITE, 4);
+    resetButton->draw("Reset", WHITE, 3);
+    rokuButton->draw("Roku", WHITE, 3);
+    pcButton->draw("PC", WHITE, 3);
     
     resetButton->run(pressed, login);
     rokuButton->run(pressed, get_roku_ip);
