@@ -24,7 +24,7 @@ void internet_run(TouchPoint pressed);
 // Roku
 void roku_setup();
 void roku_run(TouchPoint pressed);
-void current_layout();
+
 
 // Test
 void test_setup();

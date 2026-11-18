@@ -1,23 +1,23 @@
 #include "apps/apps.h"
 
 // Setup
-int screen_w = gfx->width();
-int screen_h = gfx->height();
-int margin = 20;
-int spacer = 10;
+int screen_w = 0;
+int screen_h = 0;
+int margin = 0;
+int spacer = 0;
 
 // Main Layout (3 Columns)
-int x = margin;
-int y = margin;
-int w = (screen_w - margin * 2 - spacer * 2) / 3;
-int h = (screen_h - margin * 2 - spacer * 3) / 4;
+int x = 0;
+int y = 0;
+int w = 0;
+int h = 0;
 
 // Quick Buttons (6 Columns)
-int quick_w = (screen_w - margin * 2 - spacer * 5) / 6;
-int quick_h = h;
+int quick_w = 0;
+int quick_h = 0;
 
 // Bottom Navigation
-int bottom_y = screen_h - margin - h;
+int bottom_y = 0;
 
 // Home Button
 Button* HomeButton = nullptr;
@@ -43,6 +43,10 @@ Button* ChosenButton = nullptr;
 Button* YoutubeButton = nullptr;
 // layout
 int layout = 0;
+
+void roku_commands(int num){
+    
+}
 
 void create_buttons() {
     // Remote Buttons
@@ -77,12 +81,28 @@ void create_buttons() {
     threeButton = new Button("3", x+w*2+spacer*2, bottom_y, w, h, BLUE, epd_bitmap_icons8_home_50);
 }
 void roku_setup() {
+    // Setup
+    screen_w = gfx->width();
+    screen_h = gfx->height();
+    margin = 20;
+    spacer = 10;
+    
+    // Main Layout (3 Columns)
+    x = margin;
+    y = margin;
+    w = (screen_w - margin * 2 - spacer * 2) / 3;
+    h = (screen_h - margin * 2 - spacer * 3) / 4;
+    
+    // Quick Buttons (6 Columns)
+    quick_w = (screen_w - margin * 2 - spacer * 5) / 6;
+    quick_h = h;
+    
+    // Bottom Navigation
+    bottom_y = screen_h - margin - h;
     create_buttons();
 }
 
 /*----------Layout----------*/
-
-
 void remote_layout() {
     upButton->draw("^", WHITE, 2);
     leftButton->draw("<", WHITE, 2);
@@ -115,6 +135,31 @@ void bottom_section () {
     threeButton->draw("3", WHITE, 2);
     
 }
+
+void current_layout() {
+    switch (layout) {
+        case 0:
+            clear();
+            remote_layout();
+            break;
+        case 1:
+            clear();
+            volume_layout();
+            break;
+        case 2:
+            clear();
+            quick_buttons_layout();
+            break;
+        default:
+            clear();
+            remote_layout();
+            break;
+    }
+    // Bottom Section Buttons
+    bottom_section();
+
+}
+
 void layout_one() {
     layout = 0;
     current_layout();
@@ -130,31 +175,12 @@ void layout_three() {
     current_layout();
 }
 
-void current_layout() {
-    switch (layout) {
-        case 0:
-            remote_layout();
-            break;
-        case 1:
-            volume_layout();
-            break;
-        case 2:
-            quick_buttons_layout();
-            break;
-        default:
-            remote_layout();
-            break;
-    }
 
-}
 
 void roku_run(TouchPoint pressed) {
-
     // Drawing Current Layout
     current_layout();
 
-    // Bottom Section Buttons
-    bottom_section();
     // Button being Pressed
     oneButton->run(pressed, layout_one);
     twoButton->run(pressed, layout_two);
