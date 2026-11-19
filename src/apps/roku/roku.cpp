@@ -44,8 +44,37 @@ Button* YoutubeButton = nullptr;
 // layout
 int layout = 0;
 
-void roku_commands(int num){
+void roku_commands(const char* command){
+    log("Roku", "Initializing");
+
+    // Getting Token
+    String token = get_token();
+
+    // Checking if Session Token Exists
+    if (token.isEmpty()) {
+        log("Storage", "No Session_Token found!");
+        return;
+    }
+
+    // Createing Json Document Object
+    JsonDocument request;
+    request["session_token"] = token;
+    request["command"] = command;
     
+    // Createing String
+    String body;
+
+    // Turning json document into a string
+    serializeJson(request, body);
+
+    // Createing Json Response Object
+    JsonDocument response;
+    
+    // Using Jax Http request
+    if (!jax_request("roku/commands", body, response, true, token)) {
+        return;
+    }
+
 }
 
 void create_buttons() {
@@ -110,6 +139,9 @@ void remote_layout() {
     rightButton->draw(">", WHITE, 2);
     downButton->draw("v", WHITE, 2);
     HomeButton->draw("Home", WHITE, 2);
+
+    // Hit
+
 }
 
 void volume_layout() {
