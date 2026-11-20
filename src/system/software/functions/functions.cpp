@@ -136,7 +136,7 @@ void Button::hit(TouchPoint pressed, void (*function)(TouchPoint))
         if (function != nullptr)
         {
             function(pressed);
-            timeout();
+            //timeout();
 
         }
     }
@@ -171,6 +171,22 @@ void Button::run(TouchPoint pressed, void (*function)())
         if (function != nullptr)
         {
             function();
+        }
+    }
+}
+void Button::push(TouchPoint pressed, void (*function)(const char*), const char* value)
+{
+    if (!pressed.pressed)
+        return;
+
+    if (pressed.x >= x &&
+        pressed.x <= x + w &&
+        pressed.y >= y &&
+        pressed.y <= y + h)
+    {
+        if (function != nullptr)
+        {
+            function(value);
         }
     }
 }

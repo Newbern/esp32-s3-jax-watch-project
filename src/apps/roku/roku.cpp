@@ -41,6 +41,23 @@ Button* CrunchyrollButton = nullptr;
 Button* DisneyPlusButton = nullptr;
 Button* ChosenButton = nullptr;
 Button* YoutubeButton = nullptr;
+// Values
+// Values
+const char* home = "home";
+const char* up = "up";
+const char* down = "down";
+const char* left = "left";
+const char* right = "right";
+const char* select = "select";
+const char* volume_up = "volume_up";
+const char* volume_down = "volume_down";
+const char* hbo = "hbo";
+const char* netflix = "netflix";
+const char* crunchyroll = "crunchyroll";
+const char* disney_plus = "disney_plus";
+const char* chosen = "chosen";
+const char* youtube = "youtube";
+
 // layout
 int layout = 0;
 
@@ -132,7 +149,7 @@ void roku_setup() {
 }
 
 /*----------Layout----------*/
-void remote_layout() {
+void remote_layout(TouchPoint pressed) {
     upButton->draw("^", WHITE, 2);
     leftButton->draw("<", WHITE, 2);
     okButton->draw("OK", WHITE, 2);
@@ -141,16 +158,26 @@ void remote_layout() {
     HomeButton->draw("Home", WHITE, 2);
 
     // Hit
+    upButton->push(pressed, roku_commands, up);
+    downButton->push(pressed, roku_commands, down);
+    leftButton->push(pressed, roku_commands, left);
+    rightButton->push(pressed, roku_commands, right);
+    okButton->push(pressed, roku_commands, select);
+    HomeButton->push(pressed, roku_commands, home);
 
 }
 
-void volume_layout() {
+void volume_layout(TouchPoint pressed) {
     // Drawing Buttons
     volumeUpButton->draw("Volume Up", WHITE, 2);
     volumeDownButton->draw("Volume Down", WHITE, 2);
+
+    // Button Being Pressed
+    volumeUpButton->push(pressed, roku_commands, volume_up);
+    volumeDownButton->push(pressed, roku_commands, volume_down);
 }
 
-void quick_buttons_layout() {
+void quick_buttons_layout(TouchPoint pressed) {
     // Drawing Buttons
     HBOButton->draw("HBO", WHITE, 2);
     NetflixButton->draw("Netflix", WHITE, 2);
@@ -158,64 +185,73 @@ void quick_buttons_layout() {
     DisneyPlusButton->draw("Disney+", WHITE, 2);
     ChosenButton->draw("Chosen", WHITE, 2);
     YoutubeButton->draw("YouTube", WHITE, 2);
+
+    // Button Being Pressed
+    HBOButton->push(pressed, roku_commands, hbo);
+    NetflixButton->push(pressed, roku_commands, netflix);
+    CrunchyrollButton->push(pressed, roku_commands, crunchyroll);
+    DisneyPlusButton->push(pressed, roku_commands, disney_plus);
+    ChosenButton->push(pressed, roku_commands, chosen);
+    YoutubeButton->push(pressed, roku_commands, youtube);
 }
 
-void bottom_section () {
+void bottom_section(TouchPoint pressed) {
     // Drawing Buttons
     oneButton->draw("1", WHITE, 2);
     twoButton->draw("2", WHITE, 2);
     threeButton->draw("3", WHITE, 2);
-    
+
+    // Button Being Pressed
+    oneButton->hit(pressed, layout_one);
+    twoButton->hit(pressed, layout_two);
+    threeButton->hit(pressed, layout_three);
 }
 
-void current_layout() {
+void current_layout(TouchPoint pressed) {
     switch (layout) {
         case 0:
             clear();
-            remote_layout();
+            remote_layout(pressed);
             break;
         case 1:
             clear();
-            volume_layout();
+            volume_layout(pressed);
             break;
         case 2:
             clear();
-            quick_buttons_layout();
+            quick_buttons_layout(pressed);
             break;
         default:
             clear();
-            remote_layout();
+            remote_layout(pressed);
             break;
     }
     // Bottom Section Buttons
-    bottom_section();
+    bottom_section(pressed);
 
 }
 
-void layout_one() {
+void layout_one(TouchPoint pressed) {
     layout = 0;
-    current_layout();
+    current_layout(pressed);
 }
 
-void layout_two() {
+void layout_two(TouchPoint pressed) {
     layout = 1;
-    current_layout();
+    current_layout(pressed);
 }
 
-void layout_three() {
+void layout_three(TouchPoint pressed) {
     layout = 2;
-    current_layout();
+    current_layout(pressed);
 }
 
 
 
 void roku_run(TouchPoint pressed) {
     // Drawing Current Layout
-    current_layout();
+    current_layout(pressed);
 
-    // Button being Pressed
-    oneButton->run(pressed, layout_one);
-    twoButton->run(pressed, layout_two);
-    threeButton->run(pressed, layout_three);
+    
 
 }

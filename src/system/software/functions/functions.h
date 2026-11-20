@@ -39,6 +39,7 @@ public:
     void hit(TouchPoint touch, void (*function)(TouchPoint));
     void hit(TouchPoint touch, int app_id);
     void run(TouchPoint touch, void (*function)());
+    void push(TouchPoint touch, void (*function)(const char*), const char* value);
     bool swipe(TouchPoint touch, int a, int b, bool x_asis);
 };
 
